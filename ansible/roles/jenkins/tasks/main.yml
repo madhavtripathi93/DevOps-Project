@@ -1,0 +1,100 @@
+# =============================================================================
+# Jenkins Installation Role
+# =============================================================================
+# Deploys Jenkins as a Docker container for CI/CD pipeline management.
+# This approach keeps the setup simple and portable across platforms.
+# All tasks are idempotent — safe to run multiple times.
+# =============================================================================
+
+---
+# ---------- Prerequisites ----------
+
+- name: "Ensure Docker is running"
+  ansible.builtin.command: docker info
+  register: docker_info
+  changed_when: false
+  failed_when: docker_info.rc != 0
+
+# ---------- Jenkins Home Directory ----------
+
+- name: "Create Jenkins home directory"
+  ansible.builtin.file:
+    path: "{{ jenkins_home }}"
+    state: directory
+    mode: "0755"
+
+# ---------- Check Existing Container ----------
+
+- name: "Check if Jenkins container already exists"
+  ansible.builtin.command: docker ps -a --filter "name={{ jenkins_container_name }}" --format "{{ '{{' }}.Status{{ '}}' }}"
+  register: jenkins_container_status
+  changed_when: false
+  failed_when: false
+
+# ---------- Start Jenkins Container ----------
+
+- name: "Start Jenkins container"
+  ansible.builtin.command: >
+    docker run -d
+    --name {{ jenkins_container_name }}
+    --restart=unless-stopped
+    -p {{ jenkins_port }}:8080
+    -p 50000:50000
+    -v {{ jenkins_home }}:/var/jenkins_home
+    -v /var/run/docker.sock:/var/run/docker.sock
+    jenkins/jenkins:lts
+  when: jenkins_container_status.stdout == ""
+  register: jenkins_started
+
+# ---------- Start Existing Stopped Container ----------
+
+- name: "Start existing Jenkins container if stopped"
+  ansible.builtin.command: docker start {{ jenkins_container_name }}
+  when:
+    - jenkins_container_status.stdout != ""
+    - "'Up' not in jenkins_container_status.stdout"
+  register: jenkins_restarted
+  changed_when: jenkins_restarted.rc == 0
+
+# ---------- Wait for Jenkins to Boot ----------
+
+- name: "Wait for Jenkins to become available"
+  ansible.builtin.uri:
+    url: "http://localhost:{{ jenkins_port }}/login"
+    method: GET
+    status_code: 200
+    timeout: 5
+  register: jenkins_ready
+  retries: 30
+  delay: 10
+  until: jenkins_ready.status == 200
+  when: jenkins_started is changed or jenkins_restarted is changed
+  failed_when: false
+
+# ---------- Retrieve Initial Admin Password ----------
+
+- name: "Get Jenkins initial admin password"
+  ansible.builtin.command: >
+    docker exec {{ jenkins_container_name }}
+    cat /var/jenkins_home/secrets/initialAdminPassword
+  register: jenkins_password
+  changed_when: false
+  failed_when: false
+
+- name: "Display Jenkins access information"
+  ansible.builtin.debug:
+    msg: |
+      ============================================
+      Jenkins is running!
+      ============================================
+
+      URL:      http://localhost:{{ jenkins_port }}
+      Password: {{ jenkins_password.stdout | default('Check ~/jenkins_home/secrets/initialAdminPassword') }}
+
+      Setup Steps:
+      1. Open http://localhost:{{ jenkins_port }}
+      2. Enter the initial admin password above
+      3. Install suggested plugins
+      4. Create your admin user
+      5. Configure the pipeline using the Jenkinsfile
+      ============================================

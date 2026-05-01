@@ -1,0 +1,73 @@
+# =============================================================================
+# Ansible Main Playbook
+# =============================================================================
+# Orchestrates the installation and configuration of all required tools
+# for the AI-Driven DevOps CI/CD Pipeline project.
+#
+# Usage:
+#   ansible-playbook -i inventory.ini playbook.yml
+#
+# To run specific roles only:
+#   ansible-playbook -i inventory.ini playbook.yml --tags docker
+#   ansible-playbook -i inventory.ini playbook.yml --tags kubernetes
+#   ansible-playbook -i inventory.ini playbook.yml --tags jenkins
+# =============================================================================
+
+---
+- name: Configure DevOps CI/CD Pipeline Environment
+  hosts: ec2_server
+  become: true  # We need root for most apt operations on Ubuntu
+  gather_facts: true
+
+  vars:
+    # Docker settings
+    docker_compose_version: "2.23.0"
+
+    # Kubernetes settings
+    kubectl_version: "v1.28.3"
+    minikube_version: "latest"
+    minikube_profile: "devops-cluster"
+
+    # Jenkins settings
+    jenkins_port: 8080
+    jenkins_container_name: "jenkins-devops"
+    jenkins_home: "/home/ubuntu/jenkins_home"
+
+  pre_tasks:
+    - name: Display system information
+      ansible.builtin.debug:
+        msg: |
+          System: {{ ansible_os_family }} ({{ ansible_distribution }})
+          Architecture: {{ ansible_architecture }}
+          Python: {{ ansible_python_version }}
+
+  roles:
+    - role: docker
+      tags: docker
+
+    - role: kubernetes
+      tags: kubernetes
+
+    - role: jenkins
+      tags: jenkins
+
+  post_tasks:
+    - name: Display setup summary
+      ansible.builtin.debug:
+        msg: |
+          ============================================
+          DevOps Environment Setup Complete!
+          ============================================
+
+          Docker:      docker --version
+          kubectl:     kubectl version --client
+          Minikube:    minikube version
+          Jenkins:     http://localhost:{{ jenkins_port }}
+
+          Next Steps:
+          1. cd ../terraform && terraform init && terraform apply
+          2. Access Jenkins at http://localhost:{{ jenkins_port }}
+          3. Deploy the app: kubectl apply -f ../kubernetes/
+          4. Start AIOps: python ../aiops/aiops_engine.py
+          ============================================
+      tags: always

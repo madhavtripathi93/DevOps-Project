@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: agent-backend
+  namespace: devops-project
+  labels:
+    app: agent-backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: agent-backend
+  template:
+    metadata:
+      labels:
+        app: agent-backend
+    spec:
+      containers:
+        - name: agent-backend
+          image: DOCKER_REGISTRY/agent-backend:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
+          env:
+            - name: DB_USER
+              value: "root"
+            - name: DB_PASSWORD
+              value: "your_password"
+            - name: DB_HOST
+              value: "agent-mysql"
+            - name: DB_NAME
+              value: "agent_marketplace"
+            - name: ALLOWED_ORIGINS
+              value: "*"
+            - name: LLM_PROVIDER
+              value: "ollama"
+            - name: OLLAMA_HOST
+              value: "http://host.minikube.internal:11434"
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "256Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+          readinessProbe:
+            httpGet:
+              path: /docs
+              port: 8000
+            initialDelaySeconds: 15
+            periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: agent-backend
+  namespace: devops-project
+spec:
+  type: ClusterIP
+  selector:
+    app: agent-backend
+  ports:
+    - port: 8000
+      targetPort: 8000

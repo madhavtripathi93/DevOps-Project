@@ -1,0 +1,28 @@
+# =============================================================================
+# Kubernetes Service — DevOps Flask Application
+# =============================================================================
+# Exposes the Flask application using NodePort for external access.
+# In production, you would use LoadBalancer or Ingress instead.
+#
+# Access via Minikube:
+#   minikube service devops-app-service -n devops-project --url
+# =============================================================================
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: devops-app-service
+  namespace: devops-project
+  labels:
+    app: devops-app
+    project: ai-devops-pipeline
+spec:
+  type: NodePort
+  selector:
+    app: devops-app
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80            # Service port (internal cluster access)
+      targetPort: 5000    # Container port (Flask app)
+      nodePort: 30080     # External port (accessible from host)

@@ -1,0 +1,48 @@
+# =============================================================================
+# Docker Ignore — Exclude unnecessary files from the Docker build context
+# =============================================================================
+
+# Version control
+.git
+.gitignore
+
+# Documentation
+README.md
+docs/
+*.md
+
+# Infrastructure & config files (not needed in the app image)
+terraform/
+ansible/
+jenkins/
+kubernetes/
+monitoring/
+aiops/
+
+# Python artifacts
+__pycache__
+*.pyc
+*.pyo
+*.egg-info
+.eggs
+dist
+build
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Docker files (prevent recursive copy)
+docker/Dockerfile
+docker/.dockerignore

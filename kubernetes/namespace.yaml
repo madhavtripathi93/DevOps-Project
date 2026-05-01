@@ -1,0 +1,15 @@
+# =============================================================================
+# Kubernetes Namespace
+# =============================================================================
+# Dedicated namespace for the AI-DevOps Pipeline application workloads.
+# Isolates resources from other cluster workloads.
+# =============================================================================
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: devops-project
+  labels:
+    project: ai-devops-pipeline
+    environment: development
+    managed-by: kubectl
