@@ -32,9 +32,11 @@ spec:
               value: "agent_marketplace"
             - name: ALLOWED_ORIGINS
               value: "*"
-            - name: LLM_PROVIDER
-              value: "ollama"
-            - name: OLLAMA_HOST
+            - name: MAIN_AGENT_API_KEY
+              value: ""
+            - name: MAIN_AGENT_MODEL
+              value: "llama3.1:8b"
+            - name: OLLAMA_BASE_URL
               value: "http://host.minikube.internal:11434"
           resources:
             requests:
@@ -56,9 +58,10 @@ metadata:
   name: agent-backend
   namespace: devops-project
 spec:
-  type: ClusterIP
+  type: NodePort
   selector:
     app: agent-backend
   ports:
     - port: 8000
       targetPort: 8000
+      nodePort: 30080

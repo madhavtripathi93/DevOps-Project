@@ -9,11 +9,9 @@ from app.database.seed import seed_agents, seed_tools
 from app.routes import auth, agents, execution, health, workflows, deployments, tools
 from app.middleware.auth import api_key_middleware
 
-# Basic logging configuration
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
-# Initialize database tables on startup
 def init_db():
     try:
         logger.info("Initializing database and tables...")
@@ -32,7 +30,6 @@ init_db()
 
 app = FastAPI(title="Agent Marketplace API")
 
-# Global exception handler
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception):
     logger.exception(f"Unhandled exception on {request.url.path}: {str(exc)}")
@@ -41,7 +38,6 @@ async def global_exception_handler(request: Request, exc: Exception):
         content={"error": "internal_server_error", "message": "An unexpected error occurred. Please check logs."},
     )
 
-# CORS middleware
 origins = settings.ALLOWED_ORIGINS.split(",")
 app.add_middleware(
     CORSMiddleware,
@@ -51,10 +47,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Authentication middleware
 app.middleware("http")(api_key_middleware)
 
-# Include routers
 app.include_router(auth.router, prefix="/auth", tags=["auth"])
 app.include_router(agents.router, prefix="/agents", tags=["agents"])
 app.include_router(execution.router, prefix="/run", tags=["execution"])

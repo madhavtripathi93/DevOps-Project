@@ -14,3 +14,11 @@ loguru
 jsonschema
 ddgs
 mcp
+langgraph
+langchain
+langchain-core
+langchain-community
+langchain-openai
+langchain-anthropic
+langchain-groq
+langchain-experimental

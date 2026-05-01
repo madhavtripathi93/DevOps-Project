@@ -100,7 +100,7 @@ DRY_RUN = False
 
 # URL of the application service (for health checks and metrics)
 # We will use the agent-frontend or backend. For health checks, backend is best.
-APP_SERVICE_URL = "http://54.87.147.138:30081"
+APP_SERVICE_URL = "http://100.55.22.16:30080"
 
 # =============================================================================
 # Logging Settings

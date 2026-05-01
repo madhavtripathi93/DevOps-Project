@@ -1,2 +1,5 @@
 mcp
 fastmcp
+duckduckgo-search
+requests
+beautifulsoup4

@@ -52,7 +52,6 @@ class Orchestrator:
                 workflow_status = "failed"
                 break
             
-            # Execute agent step with latency tracking
             try:
                 start_time = time.perf_counter()
                 step_result = await agent_instance.execute(current_input, tools=tools)
@@ -66,8 +65,6 @@ class Orchestrator:
                     workflow_status = "failed"
                     break
                 
-                # Chain output to next input
-                # Handle structured output if available
                 current_input = step_result["output"]
                 final_output = step_result.get("structured_output", current_input)
                 

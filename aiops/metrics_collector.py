@@ -96,7 +96,7 @@ class MetricsCollector:
     def _check_app_health(self):
         try:
             start = time.time()
-            r = requests.get(f"{config.APP_SERVICE_URL}/api/status", timeout=5)
+            r = requests.get(f"{config.APP_SERVICE_URL}/health", timeout=5)
             rt = (time.time() - start) * 1000
             return {"status_code": r.status_code, "response_time_ms": round(rt, 2),
                     "healthy": r.status_code == 200}

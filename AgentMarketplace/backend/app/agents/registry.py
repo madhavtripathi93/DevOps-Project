@@ -1,22 +1,26 @@
 from app.agents.base import BaseAgent
 from app.agents.router_agent import RouterAgent
+from app.config import settings
+
+# Use the global model if set, otherwise fallback to agent-specific models
+MODEL_NAME = settings.MAIN_MODEL or "gemma4:e4b"
 
 class ResearcherAgent(BaseAgent):
-    def __init__(self, model="gemma4:e4b"):
+    def __init__(self, model=MODEL_NAME):
         super().__init__("ResearcherAgent", model)
 
     def generate_prompt(self, input_text: str) -> str:
         return f"Generate detailed, structured bullet points with headings about: {input_text}. Include key facts, examples, and insights."
 
 class SummarizerAgent(BaseAgent):
-    def __init__(self, model="gemma4:e4b"):
+    def __init__(self, model=MODEL_NAME):
         super().__init__("SummarizerAgent", model)
 
     def generate_prompt(self, input_text: str) -> str:
         return f"Summarize the following content into concise, meaningful points. Preserve important details and structure: {input_text}"
 
 class WriterAgent(BaseAgent):
-    def __init__(self, model="gemma4:e4b"):
+    def __init__(self, model=MODEL_NAME):
         super().__init__("WriterAgent", model)
 
     def generate_prompt(self, input_text: str) -> str:

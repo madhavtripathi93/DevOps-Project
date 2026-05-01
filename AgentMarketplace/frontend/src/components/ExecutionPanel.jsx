@@ -50,6 +50,17 @@ export default function ExecutionPanel({ result }) {
         </div>
       )}
 
+      {steps.length === 0 && status === 'failed' && (
+        <div className="p-6 rounded-[2rem] bg-red-500/10 border border-red-500/20 space-y-3">
+          <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-red-500">
+            <XCircle size={14} /> Execution Error
+          </div>
+          <div className="text-sm font-mono tracking-tight text-red-500 leading-relaxed whitespace-pre-wrap">
+            {result.output || result.error || "An unknown error occurred during execution."}
+          </div>
+        </div>
+      )}
+
       <div className="grid grid-cols-1 gap-6">
         {steps.map((step, idx) => (
           <div key={idx} className="group relative rounded-3xl border border-border bg-card overflow-hidden transition-all hover:border-primary/30">

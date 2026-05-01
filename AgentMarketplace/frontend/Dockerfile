@@ -14,15 +14,17 @@ COPY . .
 # Build the production app
 RUN npm run build
 
-# Stage 2: Serve the app with a simple server
-FROM node:20-slim
+# Stage 2: Serve the app with Nginx
+FROM nginx:alpine
 
-WORKDIR /app
-RUN npm install -g serve
-COPY --from=builder /app/dist ./dist
+# Copy the built app to nginx html folder
+COPY --from=builder /app/dist /usr/share/nginx/html
 
-# Expose the port the app runs on
+# Copy custom nginx configuration
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Expose the port
 EXPOSE 5173
 
-# Command to run the application
-CMD ["serve", "-s", "dist", "-l", "5173"]
+# Start Nginx
+CMD ["nginx", "-g", "daemon off;"]

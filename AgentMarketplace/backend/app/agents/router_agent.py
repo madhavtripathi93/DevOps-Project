@@ -1,9 +1,13 @@
 from app.agents.base import BaseAgent
+from app.config import settings
 from typing import List, Dict, Any
 import json
 
+# Use the global model if set, otherwise fallback to agent-specific model
+MODEL_NAME = settings.MAIN_MODEL or "llama3.2:3b"
+
 class RouterAgent(BaseAgent):
-    def __init__(self, model="llama3.2:3b"):
+    def __init__(self, model=MODEL_NAME):
         super().__init__("RouterAgent", model)
 
     def generate_prompt(self, input_text: str) -> str:
@@ -24,15 +28,12 @@ class RouterAgent(BaseAgent):
         """
 
     async def execute(self, input_text: str) -> Dict[str, Any]:
-        # Override execute to parse result as a list
         result = await super().execute(input_text)
         if result["status"] == "success":
             parsed = self.parse_json_safe(result["output"])
-            # If parsing failed or result is not a list, try to handle it
             if isinstance(parsed, list):
                 result["workflow"] = parsed
             elif isinstance(parsed, dict) and "content" in parsed:
-                # Basic text fallback, try to extract agent names
                 agents = []
                 for a in ["researcher", "summarizer", "writer"]:
                     if a in parsed["content"].lower():
