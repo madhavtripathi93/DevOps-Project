@@ -1,0 +1,16 @@
+fastapi
+uvicorn
+sqlalchemy
+mysql-connector-python
+python-multipart
+python-jose[cryptography]
+passlib[bcrypt]
+httpx
+python-dotenv
+pydantic
+pydantic-settings
+gunicorn
+loguru
+jsonschema
+ddgs
+mcp

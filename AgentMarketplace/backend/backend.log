@@ -1,0 +1,1223 @@
+2026-04-04 09:19:02,328 - __main__ - INFO - Initializing database and tables...
+2026-04-04 09:19:02,352 - __main__ - INFO - Database and agents initialized successfully.
+INFO:     Will watch for changes in these directories: ['/Users/aryanbhutyal/Downloads/4 April/backend']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [19393] using StatReload
+Agents seeded successfully.
+2026-04-04 09:19:02,894 - __mp_main__ - INFO - Initializing database and tables...
+2026-04-04 09:19:02,913 - __mp_main__ - INFO - Database and agents initialized successfully.
+2026-04-04 09:19:02,940 - app.main - INFO - Initializing database and tables...
+2026-04-04 09:19:02,951 - app.main - INFO - Database and agents initialized successfully.
+INFO:     Started server process [19396]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+2026-04-04 09:19:06,766 - app.services.orchestrator - INFO - Starting workflow with 3 agents
+2026-04-04 09:19:06,766 - app.services.orchestrator - INFO - Step 1: Executing researcher
+2026-04-04 09:19:06,766 - app.agents.base - INFO - Executing agent ResearcherAgent with model llama3.2:3b
+2026-04-04 09:20:33,917 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/generate "HTTP/1.1 200 OK"
+2026-04-04 09:20:33,961 - app.services.orchestrator - INFO - Step 1 (researcher) completed successfully
+2026-04-04 09:20:33,961 - app.services.orchestrator - INFO - Step 2: Executing summarizer
+2026-04-04 09:20:33,964 - app.agents.base - INFO - Executing agent SummarizerAgent with model llama3.2:3b
+2026-04-04 09:21:03,879 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/generate "HTTP/1.1 200 OK"
+2026-04-04 09:21:03,919 - app.services.orchestrator - INFO - Step 2 (summarizer) completed successfully
+2026-04-04 09:21:03,919 - app.services.orchestrator - INFO - Step 3: Executing writer
+2026-04-04 09:21:03,919 - app.agents.base - INFO - Executing agent WriterAgent with model llama3.2:3b
+2026-04-04 09:22:18,715 - httpx - INFO - HTTP Request: POST http://localhost:11434/api/generate "HTTP/1.1 200 OK"
+2026-04-04 09:22:18,742 - app.services.orchestrator - INFO - Step 3 (writer) completed successfully
+2026-04-04 09:22:18,742 - app.services.orchestrator - INFO - Workflow completed with final output length 3637
+Agents seeded successfully.
+Agents seeded successfully.
+INFO:     127.0.0.1:55019 - "POST /run/workflow/run HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55158 - "POST /auth/register HTTP/1.1" 200 OK
+2026-04-04 09:40:24,486 - app.main - ERROR - Unhandled exception on /agents/: 401: Missing API Key
+  + Exception Group Traceback (most recent call last):
+  |   File "/Users/aryanbhutyal/Downloads/4 April/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 81, in collapse_excgroups
+  |     yield
+  |   File "/Users/aryanbhutyal/Downloads/4 April/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 192, in __call__
+  |     async with anyio.create_task_group() as task_group:
+  |   File "/Users/aryanbhutyal/Downloads/4 April/backend/venv/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 799, in __aexit__
+  |     raise BaseExceptionGroup(
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "/Users/aryanbhutyal/Downloads/4 April/backend/venv/lib/python3.11/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    |     await self.app(scope, receive, _send)
+    |   File "/Users/aryanbhutyal/Downloads/4 April/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 191, in __call__
+    |     with recv_stream, send_stream, collapse_excgroups():
+    |   File "/Users/aryanbhutyal/.pyenv/versions/3.11.5/lib/python3.11/contextlib.py", line 155, in __exit__
+    |     self.gen.throw(typ, value, traceback)
+    |   File "/Users/aryanbhutyal/Downloads/4 April/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 87, in collapse_excgroups
+    |     raise exc
+    |   File "/Users/aryanbhutyal/Downloads/4 April/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 193, in __call__
+    |     response = await self.dispatch_func(request, call_next)
+    |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/Users/aryanbhutyal/Downloads/4 April/backend/app/middleware/auth.py", line 13, in api_key_middleware
+    |     raise HTTPException(status_code=401, detail="Missing API Key")
+    | fastapi.exceptions.HTTPException: 401: Missing API Key
+    +------------------------------------
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/aryanbhutyal/Downloads/4 April/backend/venv/lib/python3.11/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/Users/aryanbhutyal/Downloads/4 April/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 191, in __call__
+    with recv_stream, send_stream, collapse_excgroups():
+  File "/Users/aryanbhutyal/.pyenv/versions/3.11.5/lib/python3.11/contextlib.py", line 155, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/aryanbhutyal/Downloads/4 April/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 87, in collapse_excgroups
+    raise exc
+  File "/Users/aryanbhutyal/Downloads/4 April/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 193, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aryanbhutyal/Downloads/4 April/backend/app/middleware/auth.py", line 13, in api_key_middleware
+    raise HTTPException(status_code=401, detail="Missing API Key")
+fastapi.exceptions.HTTPException: 401: Missing API Key
+INFO:     127.0.0.1:55158 - "OPTIONS /agents/ HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+  + Exception Group Traceback (most recent call last):
+  |   File "/Users/aryanbhutyal/Downloads/4 April/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 81, in collapse_excgroups
+  |     yield
+  |   File "/Users/aryanbhutyal/Downloads/4 April/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 192, in __call__
+  |     async with anyio.create_task_group() as task_group:
+  |   File "/Users/aryanbhutyal/Downloads/4 April/backend/venv/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 799, in __aexit__
+  |     raise BaseExceptionGroup(
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "/Users/aryanbhutyal/Downloads/4 April/backend/venv/lib/python3.11/site-packages/uvicorn/protocols/http/h11_impl.py", line 415, in run_asgi
+    |     result = await app(  # type: ignore[func-returns-value]
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/Users/aryanbhutyal/Downloads/4 April/backend/venv/lib/python3.11/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    |     return await self.app(scope, receive, send)
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/Users/aryanbhutyal/Downloads/4 April/backend/venv/lib/python3.11/site-packages/fastapi/applications.py", line 1163, in __call__
+    |     await super().__call__(scope, receive, send)
+    |   File "/Users/aryanbhutyal/Downloads/4 April/backend/venv/lib/python3.11/site-packages/starlette/applications.py", line 90, in __call__
+    |     await self.middleware_stack(scope, receive, send)
+    |   File "/Users/aryanbhutyal/Downloads/4 April/backend/venv/lib/python3.11/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    |     raise exc
+    |   File "/Users/aryanbhutyal/Downloads/4 April/backend/venv/lib/python3.11/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    |     await self.app(scope, receive, _send)
+    |   File "/Users/aryanbhutyal/Downloads/4 April/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 191, in __call__
+    |     with recv_stream, send_stream, collapse_excgroups():
+    |   File "/Users/aryanbhutyal/.pyenv/versions/3.11.5/lib/python3.11/contextlib.py", line 155, in __exit__
+    |     self.gen.throw(typ, value, traceback)
+    |   File "/Users/aryanbhutyal/Downloads/4 April/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 87, in collapse_excgroups
+    |     raise exc
+    |   File "/Users/aryanbhutyal/Downloads/4 April/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 193, in __call__
+    |     response = await self.dispatch_func(request, call_next)
+    |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/Users/aryanbhutyal/Downloads/4 April/backend/app/middleware/auth.py", line 13, in api_key_middleware
+    |     raise HTTPException(status_code=401, detail="Missing API Key")
+    | fastapi.exceptions.HTTPException: 401: Missing API Key
+    +------------------------------------
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/aryanbhutyal/Downloads/4 April/backend/venv/lib/python3.11/site-packages/uvicorn/protocols/http/h11_impl.py", line 415, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aryanbhutyal/Downloads/4 April/backend/venv/lib/python3.11/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aryanbhutyal/Downloads/4 April/backend/venv/lib/python3.11/site-packages/fastapi/applications.py", line 1163, in __call__
+    await super().__call__(scope, receive, send)
+  File "/Users/aryanbhutyal/Downloads/4 April/backend/venv/lib/python3.11/site-packages/starlette/applications.py", line 90, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/aryanbhutyal/Downloads/4 April/backend/venv/lib/python3.11/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/Users/aryanbhutyal/Downloads/4 April/backend/venv/lib/python3.11/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/Users/aryanbhutyal/Downloads/4 April/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 191, in __call__
+    with recv_stream, send_stream, collapse_excgroups():
+  File "/Users/aryanbhutyal/.pyenv/versions/3.11.5/lib/python3.11/contextlib.py", line 155, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/aryanbhutyal/Downloads/4 April/backend/venv/lib/python3.11/site-packages/starlette/_utils.py", line 87, in collapse_excgroups
+    raise exc
+  File "/Users/aryanbhutyal/Downloads/4 April/backend/venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 193, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/aryanbhutyal/Downloads/4 April/backend/app/middleware/auth.py", line 13, in api_key_middleware
+    raise HTTPException(status_code=401, detail="Missing API Key")
+fastapi.exceptions.HTTPException: 401: Missing API Key
+2026-04-11 12:24:24.843 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: calculator
+2026-04-11 12:24:24.843 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: text_stats
+2026-04-11 12:24:24.843 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: search
+2026-04-11 12:26:32.193 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: calculator
+2026-04-11 12:26:32.194 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: text_stats
+2026-04-11 12:26:32.194 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: search
+2026-04-11 12:26:39.514 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: calculator
+2026-04-11 12:26:39.514 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: text_stats
+2026-04-11 12:26:39.514 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: search
+2026-04-11 12:26:44.312 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: calculator
+2026-04-11 12:26:44.312 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: text_stats
+2026-04-11 12:26:44.312 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: search
+2026-04-11 12:26:50.447 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: calculator
+2026-04-11 12:26:50.447 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: text_stats
+2026-04-11 12:26:50.447 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: search
+2026-04-11 12:27:08.095 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: calculator
+2026-04-11 12:27:08.096 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: text_stats
+2026-04-11 12:27:08.096 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: search
+2026-04-11 12:27:18.610 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: calculator
+2026-04-11 12:27:18.611 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: text_stats
+2026-04-11 12:27:18.611 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: search
+2026-04-11 12:31:46.048 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: calculator
+2026-04-11 12:31:46.048 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: text_stats
+2026-04-11 12:31:46.048 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: search
+2026-04-11 12:37:28.046 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: calculator
+2026-04-11 12:37:28.046 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: text_stats
+2026-04-11 12:37:28.046 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: search
+2026-04-11 12:43:34.789 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: calculator
+2026-04-11 12:43:34.790 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: text_stats
+2026-04-11 12:43:34.790 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: search
+2026-04-11 13:37:27.863 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: calculator
+2026-04-11 13:37:27.867 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: text_stats
+2026-04-11 13:37:27.868 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: search
+2026-04-11 13:38:13.409 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: calculator
+2026-04-11 13:38:13.409 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: text_stats
+2026-04-11 13:38:13.409 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: search
+2026-04-11 13:39:27.970 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: calculator
+2026-04-11 13:39:27.970 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: text_stats
+2026-04-11 13:39:27.970 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: search
+2026-04-11 13:39:42.281 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: calculator
+2026-04-11 13:39:42.281 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: text_stats
+2026-04-11 13:39:42.281 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: search
+2026-04-11 13:40:07.783 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: calculator
+2026-04-11 13:40:07.783 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: text_stats
+2026-04-11 13:40:07.784 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: search
+2026-04-11 13:40:23.773 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: calculator
+2026-04-11 13:40:23.773 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: text_stats
+2026-04-11 13:40:23.773 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: search
+2026-04-11 13:41:50.818 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: calculator
+2026-04-11 13:41:50.818 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: text_stats
+2026-04-11 13:41:50.819 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: search
+2026-04-11 13:41:57.835 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: calculator
+2026-04-11 13:41:57.835 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: text_stats
+2026-04-11 13:41:57.835 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: search
+2026-04-17 23:35:05.671 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: calculator
+2026-04-17 23:35:05.671 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: text_stats
+2026-04-17 23:35:05.671 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: search
+2026-04-17 23:52:35.562 | INFO     | app.agents.base:execute:49 - [ResearcherAgent] Initiating intelligent execution. Budget: 5
+2026-04-17 23:52:36.087 | ERROR    | app.agents.base:execute:200 - [ResearcherAgent] Orchestration failure: unhandled errors in a TaskGroup (1 sub-exception)
+  + Exception Group Traceback (most recent call last):
+  |
+  |   File "<frozen runpy>", line 198, in _run_module_as_main
+  |   File "<frozen runpy>", line 88, in _run_code
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/uvicorn/__main__.py", line 4, in <module>
+  |     uvicorn.main()
+  |     │       └ <Command main>
+  |     └ <module 'uvicorn' from '/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/uvicorn/__i...
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/click/core.py", line 1485, in __call__
+  |     return self.main(*args, **kwargs)
+  |            │    │     │       └ {}
+  |            │    │     └ ()
+  |            │    └ <function Command.main at 0x105962660>
+  |            └ <Command main>
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/click/core.py", line 1406, in main
+  |     rv = self.invoke(ctx)
+  |          │    │      └ <click.core.Context object at 0x10506e790>
+  |          │    └ <function Command.invoke at 0x105962340>
+  |          └ <Command main>
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/click/core.py", line 1269, in invoke
+  |     return ctx.invoke(self.callback, **ctx.params)
+  |            │   │      │    │           │   └ {'host': '0.0.0.0', 'port': 8000, 'app': 'app.main:app', 'uds': None, 'fd': None, 'reload': False, 'reload_dirs': (), 'reload...
+  |            │   │      │    │           └ <click.core.Context object at 0x10506e790>
+  |            │   │      │    └ <function main at 0x106136d40>
+  |            │   │      └ <Command main>
+  |            │   └ <function Context.invoke at 0x105961580>
+  |            └ <click.core.Context object at 0x10506e790>
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/click/core.py", line 824, in invoke
+  |     return callback(*args, **kwargs)
+  |            │         │       └ {'host': '0.0.0.0', 'port': 8000, 'app': 'app.main:app', 'uds': None, 'fd': None, 'reload': False, 'reload_dirs': (), 'reload...
+  |            │         └ ()
+  |            └ <function main at 0x106136d40>
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/uvicorn/main.py", line 433, in main
+  |     run(
+  |     └ <function run at 0x1059db740>
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/uvicorn/main.py", line 606, in run
+  |     server.run()
+  |     │      └ <function Server.run at 0x1059dafc0>
+  |     └ <uvicorn.server.Server object at 0x105991150>
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/uvicorn/server.py", line 75, in run
+  |     return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+  |            │           │    │             │                      │    │      └ <function Config.get_loop_factory at 0x10596a980>
+  |            │           │    │             │                      │    └ <uvicorn.config.Config object at 0x105992190>
+  |            │           │    │             │                      └ <uvicorn.server.Server object at 0x105991150>
+  |            │           │    │             └ None
+  |            │           │    └ <function Server.serve at 0x1059db060>
+  |            │           └ <uvicorn.server.Server object at 0x105991150>
+  |            └ <function asyncio_run at 0x10596a700>
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/uvicorn/_compat.py", line 30, in asyncio_run
+  |     return runner.run(main)
+  |            │      │   └ <coroutine object Server.serve at 0x1060873d0>
+  |            │      └ <function Runner.run at 0x105714400>
+  |            └ <asyncio.runners.Runner object at 0x106146f10>
+  |
+  |   File "/opt/homebrew/Cellar/python@3.11/3.11.14_2/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 118, in run
+  |     return self._loop.run_until_complete(task)
+  |            │    │     │                  └ <Task pending name='Task-1' coro=<Server.serve() running at /Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/...
+  |            │    │     └ <function BaseEventLoop.run_until_complete at 0x10570e020>
+  |            │    └ <_UnixSelectorEventLoop running=True closed=False debug=False>
+  |            └ <asyncio.runners.Runner object at 0x106146f10>
+  |
+  |   File "/opt/homebrew/Cellar/python@3.11/3.11.14_2/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 641, in run_until_complete
+  |     self.run_forever()
+  |     │    └ <function BaseEventLoop.run_forever at 0x10570df80>
+  |     └ <_UnixSelectorEventLoop running=True closed=False debug=False>
+  |
+  |   File "/opt/homebrew/Cellar/python@3.11/3.11.14_2/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 608, in run_forever
+  |     self._run_once()
+  |     │    └ <function BaseEventLoop._run_once at 0x10570fd80>
+  |     └ <_UnixSelectorEventLoop running=True closed=False debug=False>
+  |
+  |   File "/opt/homebrew/Cellar/python@3.11/3.11.14_2/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 1936, in _run_once
+  |     handle._run()
+  |     │      └ <function Handle._run at 0x105651ee0>
+  |     └ <Handle <TaskStepMethWrapper object at 0x109c6cb80>()>
+  |
+  |   File "/opt/homebrew/Cellar/python@3.11/3.11.14_2/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/events.py", line 84, in _run
+  |     self._context.run(self._callback, *self._args)
+  |     │    │            │    │           │    └ <member '_args' of 'Handle' objects>
+  |     │    │            │    │           └ <Handle <TaskStepMethWrapper object at 0x109c6cb80>()>
+  |     │    │            │    └ <member '_callback' of 'Handle' objects>
+  |     │    │            └ <Handle <TaskStepMethWrapper object at 0x109c6cb80>()>
+  |     │    └ <member '_context' of 'Handle' objects>
+  |     └ <Handle <TaskStepMethWrapper object at 0x109c6cb80>()>
+  |
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 144, in coro
+  |     await self.app(scope, receive_or_disconnect, send_no_error)
+  |           │    │   │      │                      └ <function BaseHTTPMiddleware.__call__.<locals>.call_next.<locals>.send_no_error at 0x109edb560>
+  |           │    │   │      └ <function BaseHTTPMiddleware.__call__.<locals>.call_next.<locals>.receive_or_disconnect at 0x109ed9580>
+  |           │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+  |           │    └ <starlette.middleware.cors.CORSMiddleware object at 0x109bc68d0>
+  |           └ <starlette.middleware.base.BaseHTTPMiddleware object at 0x1064c1310>
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/starlette/middleware/cors.py", line 96, in __call__
+  |     await self.simple_response(scope, receive, send, request_headers=headers)
+  |           │    │               │      │        │                     └ Headers({'host': 'localhost:8000', 'connection': 'keep-alive', 'content-length': '141', 'sec-ch-ua-platform': '"macOS"', 'use...
+  |           │    │               │      │        └ <function BaseHTTPMiddleware.__call__.<locals>.call_next.<locals>.send_no_error at 0x109edb560>
+  |           │    │               │      └ <function BaseHTTPMiddleware.__call__.<locals>.call_next.<locals>.receive_or_disconnect at 0x109ed9580>
+  |           │    │               └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+  |           │    └ <function CORSMiddleware.simple_response at 0x107160f40>
+  |           └ <starlette.middleware.cors.CORSMiddleware object at 0x109bc68d0>
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/starlette/middleware/cors.py", line 154, in simple_response
+  |     await self.app(scope, receive, send)
+  |           │    │   │      │        └ functools.partial(<bound method CORSMiddleware.send of <starlette.middleware.cors.CORSMiddleware object at 0x109bc68d0>>, sen...
+  |           │    │   │      └ <function BaseHTTPMiddleware.__call__.<locals>.call_next.<locals>.receive_or_disconnect at 0x109ed9580>
+  |           │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+  |           │    └ <starlette.middleware.exceptions.ExceptionMiddleware object at 0x1064c1190>
+  |           └ <starlette.middleware.cors.CORSMiddleware object at 0x109bc68d0>
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+  |     await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  |           │                            │    │    │     │      │        └ functools.partial(<bound method CORSMiddleware.send of <starlette.middleware.cors.CORSMiddleware object at 0x109bc68d0>>, sen...
+  |           │                            │    │    │     │      └ <function BaseHTTPMiddleware.__call__.<locals>.call_next.<locals>.receive_or_disconnect at 0x109ed9580>
+  |           │                            │    │    │     └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+  |           │                            │    │    └ <starlette.requests.Request object at 0x109ef4e10>
+  |           │                            │    └ <fastapi.middleware.asyncexitstack.AsyncExitStackMiddleware object at 0x1064c1110>
+  |           │                            └ <starlette.middleware.exceptions.ExceptionMiddleware object at 0x1064c1190>
+  |           └ <function wrap_app_handling_exceptions at 0x1070991c0>
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+  |     await app(scope, receive, sender)
+  |           │   │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x109edb420>
+  |           │   │      └ <function BaseHTTPMiddleware.__call__.<locals>.call_next.<locals>.receive_or_disconnect at 0x109ed9580>
+  |           │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+  |           └ <fastapi.middleware.asyncexitstack.AsyncExitStackMiddleware object at 0x1064c1110>
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+  |     await self.app(scope, receive, send)
+  |           │    │   │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x109edb420>
+  |           │    │   │      └ <function BaseHTTPMiddleware.__call__.<locals>.call_next.<locals>.receive_or_disconnect at 0x109ed9580>
+  |           │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+  |           │    └ <fastapi.routing.APIRouter object at 0x109d2a990>
+  |           └ <fastapi.middleware.asyncexitstack.AsyncExitStackMiddleware object at 0x1064c1110>
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/starlette/routing.py", line 660, in __call__
+  |     await self.middleware_stack(scope, receive, send)
+  |           │    │                │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x109edb420>
+  |           │    │                │      └ <function BaseHTTPMiddleware.__call__.<locals>.call_next.<locals>.receive_or_disconnect at 0x109ed9580>
+  |           │    │                └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+  |           │    └ <bound method Router.app of <fastapi.routing.APIRouter object at 0x109d2a990>>
+  |           └ <fastapi.routing.APIRouter object at 0x109d2a990>
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/starlette/routing.py", line 680, in app
+  |     await route.handle(scope, receive, send)
+  |           │     │      │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x109edb420>
+  |           │     │      │      └ <function BaseHTTPMiddleware.__call__.<locals>.call_next.<locals>.receive_or_disconnect at 0x109ed9580>
+  |           │     │      └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+  |           │     └ <function Route.handle at 0x10709a700>
+  |           └ APIRoute(path='/run/', name='execute', methods=['POST'])
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/starlette/routing.py", line 276, in handle
+  |     await self.app(scope, receive, send)
+  |           │    │   │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x109edb420>
+  |           │    │   │      └ <function BaseHTTPMiddleware.__call__.<locals>.call_next.<locals>.receive_or_disconnect at 0x109ed9580>
+  |           │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+  |           │    └ <function request_response.<locals>.app at 0x109d1ef20>
+  |           └ APIRoute(path='/run/', name='execute', methods=['POST'])
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/fastapi/routing.py", line 134, in app
+  |     await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  |           │                            │    │        │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x109edb420>
+  |           │                            │    │        │      └ <function BaseHTTPMiddleware.__call__.<locals>.call_next.<locals>.receive_or_disconnect at 0x109ed9580>
+  |           │                            │    │        └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+  |           │                            │    └ <starlette.requests.Request object at 0x109f15050>
+  |           │                            └ <function request_response.<locals>.app.<locals>.app at 0x109ed91c0>
+  |           └ <function wrap_app_handling_exceptions at 0x1070991c0>
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+  |     await app(scope, receive, sender)
+  |           │   │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x109ed8fe0>
+  |           │   │      └ <function BaseHTTPMiddleware.__call__.<locals>.call_next.<locals>.receive_or_disconnect at 0x109ed9580>
+  |           │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+  |           └ <function request_response.<locals>.app.<locals>.app at 0x109ed91c0>
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/fastapi/routing.py", line 120, in app
+  |     response = await f(request)
+  |                      │ └ <starlette.requests.Request object at 0x109f15050>
+  |                      └ <function get_request_handler.<locals>.app at 0x109d1ee80>
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/fastapi/routing.py", line 674, in app
+  |     raw_response = await run_endpoint_function(
+  |                          └ <function run_endpoint_function at 0x1070c47c0>
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/fastapi/routing.py", line 328, in run_endpoint_function
+  |     return await dependant.call(**values)
+  |                  │         │      └ {'db': <sqlalchemy.orm.session.Session object at 0x109d1add0>, 'exec_req': ExecutionRequest(mode='manual', agent_id='research...
+  |                  │         └ <function execute at 0x1090ffa60>
+  |                  └ Dependant(path_params=[], query_params=[], header_params=[], cookie_params=[], body_params=[ModelField(field_info=Body(Pydant...
+  |
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/backend/app/routes/execution.py", line 47, in execute
+  |     return await Orchestrator.run_single(exec_req.agent_id, exec_req.input, tools=exec_req.tools)
+  |                  │            │          │        │         │        │            │        └ None
+  |                  │            │          │        │         │        │            └ ExecutionRequest(mode='manual', agent_id='researcher', agent_ids=None, input='i want to know the advancement on the topic "Li...
+  |                  │            │          │        │         │        └ 'i want to know the advancement on the topic "Lightweight AI for irrigation prediction".'
+  |                  │            │          │        │         └ ExecutionRequest(mode='manual', agent_id='researcher', agent_ids=None, input='i want to know the advancement on the topic "Li...
+  |                  │            │          │        └ 'researcher'
+  |                  │            │          └ ExecutionRequest(mode='manual', agent_id='researcher', agent_ids=None, input='i want to know the advancement on the topic "Li...
+  |                  │            └ <staticmethod(<function Orchestrator.run_single at 0x109c4a8e0>)>
+  |                  └ <class 'app.services.orchestrator.Orchestrator'>
+  |
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/backend/app/services/orchestrator.py", line 23, in run_single
+  |     result = await agent_instance.execute(input_text, tools=tools)
+  |                    │              │       │                 └ None
+  |                    │              │       └ 'i want to know the advancement on the topic "Lightweight AI for irrigation prediction".'
+  |                    │              └ <function BaseAgent.execute at 0x109768fe0>
+  |                    └ <app.agents.registry.ResearcherAgent object at 0x109135090>
+  |
+  | > File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/backend/app/agents/base.py", line 62, in execute
+  |     async with stdio_client(server_params) as (read, write):
+  |                │            │                  │     └ MemoryObjectSendStream(_state=_MemoryObjectStreamState(max_buffer_size=0, buffer=deque([]), open_send_channels=0, open_receiv...
+  |                │            │                  └ MemoryObjectReceiveStream(_state=_MemoryObjectStreamState(max_buffer_size=0, buffer=deque([]), open_send_channels=0, open_rec...
+  |                │            └ StdioServerParameters(command='/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/bin/python', args=['/Users/madhav...
+  |                └ <function stdio_client at 0x10973a0c0>
+  |
+  |   File "/opt/homebrew/Cellar/python@3.11/3.11.14_2/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 231, in __aexit__
+  |     await self.gen.athrow(typ, value, traceback)
+  |           │    │   │      │    │      └ <traceback object at 0x109f17b40>
+  |           │    │   │      │    └ ExceptionGroup('unhandled errors in a TaskGroup', [HTTPStatusError("Client error '404 Not Found' for url 'http://localhost:11...
+  |           │    │   │      └ <class 'ExceptionGroup'>
+  |           │    │   └ <method 'athrow' of 'async_generator' objects>
+  |           │    └ <async_generator object stdio_client at 0x109d85d20>
+  |           └ <contextlib._AsyncGeneratorContextManager object at 0x109f1a210>
+  |
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/mcp/client/stdio/__init__.py", line 182, in stdio_client
+  |     async with (
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 799, in __aexit__
+  |     raise BaseExceptionGroup(
+  |
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Exception Group Traceback (most recent call last):
+    |
+    |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/mcp/client/stdio/__init__.py", line 189, in stdio_client
+    |     yield read_stream, write_stream
+    |           │            └ MemoryObjectSendStream(_state=_MemoryObjectStreamState(max_buffer_size=0, buffer=deque([]), open_send_channels=0, open_receiv...
+    |           └ MemoryObjectReceiveStream(_state=_MemoryObjectStreamState(max_buffer_size=0, buffer=deque([]), open_send_channels=0, open_rec...
+    |
+    |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/backend/app/agents/base.py", line 63, in execute
+    |     async with ClientSession(read, write) as session:
+    |                │             │     │         └ <mcp.client.session.ClientSession object at 0x109f18590>
+    |                │             │     └ MemoryObjectSendStream(_state=_MemoryObjectStreamState(max_buffer_size=0, buffer=deque([]), open_send_channels=0, open_receiv...
+    |                │             └ MemoryObjectReceiveStream(_state=_MemoryObjectStreamState(max_buffer_size=0, buffer=deque([]), open_send_channels=0, open_rec...
+    |                └ <class 'mcp.client.session.ClientSession'>
+    |
+    |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 799, in __aexit__
+    |     raise BaseExceptionGroup(
+    |
+    | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+    +-+---------------- 1 ----------------
+      | Traceback (most recent call last):
+      |
+      |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/backend/app/agents/base.py", line 109, in execute
+      |     llm_output = await self._call_llm(client, history)
+      |                        │    │         │       └ [{'role': 'system', 'content': '\n                    You are a production-grade AI agent Optimizer. \n                    GO...
+      |                        │    │         └ <httpx.AsyncClient object at 0x109f171d0>
+      |                        │    └ <function BaseAgent._call_llm at 0x109769080>
+      |                        └ <app.agents.registry.ResearcherAgent object at 0x109135090>
+      |
+      |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/backend/app/agents/base.py", line 212, in _call_llm
+      |     response.raise_for_status()
+      |     │        └ <function Response.raise_for_status at 0x1092211c0>
+      |     └ <Response [404 Not Found]>
+      |
+      |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/httpx/_models.py", line 829, in raise_for_status
+      |     raise HTTPStatusError(message, request=request, response=self)
+      |           │               │                │                 └ <Response [404 Not Found]>
+      |           │               │                └ <Request('POST', 'http://localhost:11434/api/generate')>
+      |           │               └ "Client error '404 Not Found' for url 'http://localhost:11434/api/generate'\nFor more information check: https://developer.mo...
+      |           └ <class 'httpx.HTTPStatusError'>
+      |
+      | httpx.HTTPStatusError: Client error '404 Not Found' for url 'http://localhost:11434/api/generate'
+      | For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+      +------------------------------------
+2026-04-17 23:59:08.544 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: calculator
+2026-04-17 23:59:08.544 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: text_stats
+2026-04-17 23:59:08.544 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: search
+2026-04-18 00:00:25.998 | INFO     | app.agents.base:execute:49 - [ResearcherAgent] Initiating intelligent execution. Budget: 5
+2026-04-18 00:01:27.640 | SUCCESS  | app.agents.base:execute:181 - [ResearcherAgent] Mission accomplished in 61.64s (0 tools)
+2026-04-18 00:06:15.871 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: calculator
+2026-04-18 00:06:15.871 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: text_stats
+2026-04-18 00:06:15.872 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: search
+2026-04-18 00:06:52.941 | INFO     | app.agents.base:execute:70 - [ResearcherAgent] Initiating intelligent execution. Budget: 5
+2026-04-18 00:07:54.015 | INFO     | app.agents.base:execute:170 - [ResearcherAgent] Executing 2 MCP tools in PARALLEL
+2026-04-18 00:08:57.625 | SUCCESS  | app.agents.base:execute:202 - [ResearcherAgent] Mission accomplished in 124.68s (2 tools)
+2026-04-18 00:12:29.234 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: calculator
+2026-04-18 00:12:29.234 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: text_stats
+2026-04-18 00:12:29.234 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: search
+2026-04-18 00:14:22.582 | INFO     | app.agents.base:execute:70 - [ResearcherAgent] Initiating intelligent execution. Budget: 5
+2026-04-18 00:15:27.920 | INFO     | app.agents.base:execute:171 - [ResearcherAgent] Executing 1 MCP tools in PARALLEL
+2026-04-18 00:17:08.724 | SUCCESS  | app.agents.base:execute:203 - [ResearcherAgent] Mission accomplished in 166.14s (1 tools)
+2026-04-29 07:25:17.925 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: calculator
+2026-04-29 07:25:17.925 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: text_stats
+2026-04-29 07:25:17.925 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: search
+2026-04-29 07:25:58.423 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: calculator
+2026-04-29 07:25:58.423 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: text_stats
+2026-04-29 07:25:58.423 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: search
+2026-04-29 07:28:26.524 | INFO     | app.agents.base:execute:70 - [ResearcherAgent] Initiating intelligent execution. Budget: 5
+2026-04-29 07:28:27.054 | ERROR    | app.agents.base:execute:222 - [ResearcherAgent] Orchestration failure: unhandled errors in a TaskGroup (1 sub-exception)
+  + Exception Group Traceback (most recent call last):
+  |
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/bin/uvicorn", line 7, in <module>
+  |     sys.exit(main())
+  |     │   │    └ <Command main>
+  |     │   └ <built-in function exit>
+  |     └ <module 'sys' (built-in)>
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/click/core.py", line 1485, in __call__
+  |     return self.main(*args, **kwargs)
+  |            │    │     │       └ {}
+  |            │    │     └ ()
+  |            │    └ <function Command.main at 0x107becfe0>
+  |            └ <Command main>
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/click/core.py", line 1406, in main
+  |     rv = self.invoke(ctx)
+  |          │    │      └ <click.core.Context object at 0x107346c50>
+  |          │    └ <function Command.invoke at 0x107beccc0>
+  |          └ <Command main>
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/click/core.py", line 1269, in invoke
+  |     return ctx.invoke(self.callback, **ctx.params)
+  |            │   │      │    │           │   └ {'host': '0.0.0.0', 'port': 8000, 'app': 'app.main:app', 'uds': None, 'fd': None, 'reload': False, 'reload_dirs': (), 'reload...
+  |            │   │      │    │           └ <click.core.Context object at 0x107346c50>
+  |            │   │      │    └ <function main at 0x1083cd620>
+  |            │   │      └ <Command main>
+  |            │   └ <function Context.invoke at 0x107bdfec0>
+  |            └ <click.core.Context object at 0x107346c50>
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/click/core.py", line 824, in invoke
+  |     return callback(*args, **kwargs)
+  |            │         │       └ {'host': '0.0.0.0', 'port': 8000, 'app': 'app.main:app', 'uds': None, 'fd': None, 'reload': False, 'reload_dirs': (), 'reload...
+  |            │         └ ()
+  |            └ <function main at 0x1083cd620>
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/uvicorn/main.py", line 433, in main
+  |     run(
+  |     └ <function run at 0x107c82020>
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/uvicorn/main.py", line 606, in run
+  |     server.run()
+  |     │      └ <function Server.run at 0x107c818a0>
+  |     └ <uvicorn.server.Server object at 0x107c24d50>
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/uvicorn/server.py", line 75, in run
+  |     return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+  |            │           │    │             │                      │    │      └ <function Config.get_loop_factory at 0x107ba5a80>
+  |            │           │    │             │                      │    └ <uvicorn.config.Config object at 0x1073f0f90>
+  |            │           │    │             │                      └ <uvicorn.server.Server object at 0x107c24d50>
+  |            │           │    │             └ None
+  |            │           │    └ <function Server.serve at 0x107c81940>
+  |            │           └ <uvicorn.server.Server object at 0x107c24d50>
+  |            └ <function asyncio_run at 0x107bfd080>
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/uvicorn/_compat.py", line 30, in asyncio_run
+  |     return runner.run(main)
+  |            │      │   └ <coroutine object Server.serve at 0x1083173d0>
+  |            │      └ <function Runner.run at 0x10799ed40>
+  |            └ <asyncio.runners.Runner object at 0x1083d34d0>
+  |
+  |   File "/opt/homebrew/Cellar/python@3.11/3.11.14_2/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 118, in run
+  |     return self._loop.run_until_complete(task)
+  |            │    │     │                  └ <Task pending name='Task-1' coro=<Server.serve() running at /Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/...
+  |            │    │     └ <function BaseEventLoop.run_until_complete at 0x10799c9a0>
+  |            │    └ <_UnixSelectorEventLoop running=True closed=False debug=False>
+  |            └ <asyncio.runners.Runner object at 0x1083d34d0>
+  |
+  |   File "/opt/homebrew/Cellar/python@3.11/3.11.14_2/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 641, in run_until_complete
+  |     self.run_forever()
+  |     │    └ <function BaseEventLoop.run_forever at 0x10799c900>
+  |     └ <_UnixSelectorEventLoop running=True closed=False debug=False>
+  |
+  |   File "/opt/homebrew/Cellar/python@3.11/3.11.14_2/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 608, in run_forever
+  |     self._run_once()
+  |     │    └ <function BaseEventLoop._run_once at 0x10799e700>
+  |     └ <_UnixSelectorEventLoop running=True closed=False debug=False>
+  |
+  |   File "/opt/homebrew/Cellar/python@3.11/3.11.14_2/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 1936, in _run_once
+  |     handle._run()
+  |     │      └ <function Handle._run at 0x1078f0860>
+  |     └ <Handle <TaskStepMethWrapper object at 0x10c030610>()>
+  |
+  |   File "/opt/homebrew/Cellar/python@3.11/3.11.14_2/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/events.py", line 84, in _run
+  |     self._context.run(self._callback, *self._args)
+  |     │    │            │    │           │    └ <member '_args' of 'Handle' objects>
+  |     │    │            │    │           └ <Handle <TaskStepMethWrapper object at 0x10c030610>()>
+  |     │    │            │    └ <member '_callback' of 'Handle' objects>
+  |     │    │            └ <Handle <TaskStepMethWrapper object at 0x10c030610>()>
+  |     │    └ <member '_context' of 'Handle' objects>
+  |     └ <Handle <TaskStepMethWrapper object at 0x10c030610>()>
+  |
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 144, in coro
+  |     await self.app(scope, receive_or_disconnect, send_no_error)
+  |           │    │   │      │                      └ <function BaseHTTPMiddleware.__call__.<locals>.call_next.<locals>.send_no_error at 0x10c03b9c0>
+  |           │    │   │      └ <function BaseHTTPMiddleware.__call__.<locals>.call_next.<locals>.receive_or_disconnect at 0x10a4bdda0>
+  |           │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+  |           │    └ <starlette.middleware.cors.CORSMiddleware object at 0x10bf01c90>
+  |           └ <starlette.middleware.base.BaseHTTPMiddleware object at 0x1087543d0>
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/starlette/middleware/cors.py", line 96, in __call__
+  |     await self.simple_response(scope, receive, send, request_headers=headers)
+  |           │    │               │      │        │                     └ Headers({'host': 'localhost:8000', 'connection': 'keep-alive', 'content-length': '137', 'sec-ch-ua-platform': '"macOS"', 'use...
+  |           │    │               │      │        └ <function BaseHTTPMiddleware.__call__.<locals>.call_next.<locals>.send_no_error at 0x10c03b9c0>
+  |           │    │               │      └ <function BaseHTTPMiddleware.__call__.<locals>.call_next.<locals>.receive_or_disconnect at 0x10a4bdda0>
+  |           │    │               └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+  |           │    └ <function CORSMiddleware.simple_response at 0x1093f04a0>
+  |           └ <starlette.middleware.cors.CORSMiddleware object at 0x10bf01c90>
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/starlette/middleware/cors.py", line 154, in simple_response
+  |     await self.app(scope, receive, send)
+  |           │    │   │      │        └ functools.partial(<bound method CORSMiddleware.send of <starlette.middleware.cors.CORSMiddleware object at 0x10bf01c90>>, sen...
+  |           │    │   │      └ <function BaseHTTPMiddleware.__call__.<locals>.call_next.<locals>.receive_or_disconnect at 0x10a4bdda0>
+  |           │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+  |           │    └ <starlette.middleware.exceptions.ExceptionMiddleware object at 0x10bfd7810>
+  |           └ <starlette.middleware.cors.CORSMiddleware object at 0x10bf01c90>
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+  |     await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  |           │                            │    │    │     │      │        └ functools.partial(<bound method CORSMiddleware.send of <starlette.middleware.cors.CORSMiddleware object at 0x10bf01c90>>, sen...
+  |           │                            │    │    │     │      └ <function BaseHTTPMiddleware.__call__.<locals>.call_next.<locals>.receive_or_disconnect at 0x10a4bdda0>
+  |           │                            │    │    │     └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+  |           │                            │    │    └ <starlette.requests.Request object at 0x10c0dd690>
+  |           │                            │    └ <fastapi.middleware.asyncexitstack.AsyncExitStackMiddleware object at 0x10bfa1c10>
+  |           │                            └ <starlette.middleware.exceptions.ExceptionMiddleware object at 0x10bfd7810>
+  |           └ <function wrap_app_handling_exceptions at 0x10933c720>
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+  |     await app(scope, receive, sender)
+  |           │   │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x10c0b4220>
+  |           │   │      └ <function BaseHTTPMiddleware.__call__.<locals>.call_next.<locals>.receive_or_disconnect at 0x10a4bdda0>
+  |           │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+  |           └ <fastapi.middleware.asyncexitstack.AsyncExitStackMiddleware object at 0x10bfa1c10>
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+  |     await self.app(scope, receive, send)
+  |           │    │   │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x10c0b4220>
+  |           │    │   │      └ <function BaseHTTPMiddleware.__call__.<locals>.call_next.<locals>.receive_or_disconnect at 0x10a4bdda0>
+  |           │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+  |           │    └ <fastapi.routing.APIRouter object at 0x10bf87d90>
+  |           └ <fastapi.middleware.asyncexitstack.AsyncExitStackMiddleware object at 0x10bfa1c10>
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/starlette/routing.py", line 660, in __call__
+  |     await self.middleware_stack(scope, receive, send)
+  |           │    │                │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x10c0b4220>
+  |           │    │                │      └ <function BaseHTTPMiddleware.__call__.<locals>.call_next.<locals>.receive_or_disconnect at 0x10a4bdda0>
+  |           │    │                └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+  |           │    └ <bound method Router.app of <fastapi.routing.APIRouter object at 0x10bf87d90>>
+  |           └ <fastapi.routing.APIRouter object at 0x10bf87d90>
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/starlette/routing.py", line 680, in app
+  |     await route.handle(scope, receive, send)
+  |           │     │      │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x10c0b4220>
+  |           │     │      │      └ <function BaseHTTPMiddleware.__call__.<locals>.call_next.<locals>.receive_or_disconnect at 0x10a4bdda0>
+  |           │     │      └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+  |           │     └ <function Route.handle at 0x10933dc60>
+  |           └ APIRoute(path='/run/', name='execute', methods=['POST'])
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/starlette/routing.py", line 276, in handle
+  |     await self.app(scope, receive, send)
+  |           │    │   │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x10c0b4220>
+  |           │    │   │      └ <function BaseHTTPMiddleware.__call__.<locals>.call_next.<locals>.receive_or_disconnect at 0x10a4bdda0>
+  |           │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+  |           │    └ <function request_response.<locals>.app at 0x10bf8f060>
+  |           └ APIRoute(path='/run/', name='execute', methods=['POST'])
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/fastapi/routing.py", line 134, in app
+  |     await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  |           │                            │    │        │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x10c0b4220>
+  |           │                            │    │        │      └ <function BaseHTTPMiddleware.__call__.<locals>.call_next.<locals>.receive_or_disconnect at 0x10a4bdda0>
+  |           │                            │    │        └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+  |           │                            │    └ <starlette.requests.Request object at 0x10c09cc90>
+  |           │                            └ <function request_response.<locals>.app.<locals>.app at 0x10c0b5620>
+  |           └ <function wrap_app_handling_exceptions at 0x10933c720>
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+  |     await app(scope, receive, sender)
+  |           │   │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x10c0b5da0>
+  |           │   │      └ <function BaseHTTPMiddleware.__call__.<locals>.call_next.<locals>.receive_or_disconnect at 0x10a4bdda0>
+  |           │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+  |           └ <function request_response.<locals>.app.<locals>.app at 0x10c0b5620>
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/fastapi/routing.py", line 120, in app
+  |     response = await f(request)
+  |                      │ └ <starlette.requests.Request object at 0x10c09cc90>
+  |                      └ <function get_request_handler.<locals>.app at 0x10bf8efc0>
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/fastapi/routing.py", line 674, in app
+  |     raw_response = await run_endpoint_function(
+  |                          └ <function run_endpoint_function at 0x10933fce0>
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/fastapi/routing.py", line 328, in run_endpoint_function
+  |     return await dependant.call(**values)
+  |                  │         │      └ {'db': <sqlalchemy.orm.session.Session object at 0x10c04e910>, 'exec_req': ExecutionRequest(mode='manual', agent_id='research...
+  |                  │         └ <function execute at 0x10b39aca0>
+  |                  └ Dependant(path_params=[], query_params=[], header_params=[], cookie_params=[], body_params=[ModelField(field_info=Body(Pydant...
+  |
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main 2/backend/app/routes/execution.py", line 47, in execute
+  |     return await Orchestrator.run_single(exec_req.agent_id, exec_req.input, tools=exec_req.tools)
+  |                  │            │          │        │         │        │            │        └ None
+  |                  │            │          │        │         │        │            └ ExecutionRequest(mode='manual', agent_id='researcher', agent_ids=None, input='Check the details about advancement in Lightwei...
+  |                  │            │          │        │         │        └ 'Check the details about advancement in Lightweight AI for irrigation Pattern analysis'
+  |                  │            │          │        │         └ ExecutionRequest(mode='manual', agent_id='researcher', agent_ids=None, input='Check the details about advancement in Lightwei...
+  |                  │            │          │        └ 'researcher'
+  |                  │            │          └ ExecutionRequest(mode='manual', agent_id='researcher', agent_ids=None, input='Check the details about advancement in Lightwei...
+  |                  │            └ <staticmethod(<function Orchestrator.run_single at 0x10bee1580>)>
+  |                  └ <class 'app.services.orchestrator.Orchestrator'>
+  |
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main 2/backend/app/services/orchestrator.py", line 23, in run_single
+  |     result = await agent_instance.execute(input_text, tools=tools)
+  |                    │              │       │                 └ None
+  |                    │              │       └ 'Check the details about advancement in Lightweight AI for irrigation Pattern analysis'
+  |                    │              └ <function BaseAgent.execute at 0x10ba04220>
+  |                    └ <app.agents.registry.ResearcherAgent object at 0x10b3bdbd0>
+  |
+  | > File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main 2/backend/app/agents/base.py", line 83, in execute
+  |     async with stdio_client(server_params) as (read, write):
+  |                │            │                  │     └ MemoryObjectSendStream(_state=_MemoryObjectStreamState(max_buffer_size=0, buffer=deque([]), open_send_channels=0, open_receiv...
+  |                │            │                  └ MemoryObjectReceiveStream(_state=_MemoryObjectStreamState(max_buffer_size=0, buffer=deque([]), open_send_channels=0, open_rec...
+  |                │            └ StdioServerParameters(command='/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/bin/python3.11', args=['/Users/ma...
+  |                └ <function stdio_client at 0x10b9cd300>
+  |
+  |   File "/opt/homebrew/Cellar/python@3.11/3.11.14_2/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 231, in __aexit__
+  |     await self.gen.athrow(typ, value, traceback)
+  |           │    │   │      │    │      └ <traceback object at 0x10bfa3dc0>
+  |           │    │   │      │    └ ExceptionGroup('unhandled errors in a TaskGroup', [ConnectError('All connection attempts failed')])
+  |           │    │   │      └ <class 'ExceptionGroup'>
+  |           │    │   └ <method 'athrow' of 'async_generator' objects>
+  |           │    └ <async_generator object stdio_client at 0x10bfed2a0>
+  |           └ <contextlib._AsyncGeneratorContextManager object at 0x10be59050>
+  |
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/mcp/client/stdio/__init__.py", line 182, in stdio_client
+  |     async with (
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 799, in __aexit__
+  |     raise BaseExceptionGroup(
+  |
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Exception Group Traceback (most recent call last):
+    |
+    |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/mcp/client/stdio/__init__.py", line 189, in stdio_client
+    |     yield read_stream, write_stream
+    |           │            └ MemoryObjectSendStream(_state=_MemoryObjectStreamState(max_buffer_size=0, buffer=deque([]), open_send_channels=0, open_receiv...
+    |           └ MemoryObjectReceiveStream(_state=_MemoryObjectStreamState(max_buffer_size=0, buffer=deque([]), open_send_channels=0, open_rec...
+    |
+    |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main 2/backend/app/agents/base.py", line 84, in execute
+    |     async with ClientSession(read, write) as session:
+    |                │             │     │         └ <mcp.client.session.ClientSession object at 0x10c08b0d0>
+    |                │             │     └ MemoryObjectSendStream(_state=_MemoryObjectStreamState(max_buffer_size=0, buffer=deque([]), open_send_channels=0, open_receiv...
+    |                │             └ MemoryObjectReceiveStream(_state=_MemoryObjectStreamState(max_buffer_size=0, buffer=deque([]), open_send_channels=0, open_rec...
+    |                └ <class 'mcp.client.session.ClientSession'>
+    |
+    |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 799, in __aexit__
+    |     raise BaseExceptionGroup(
+    |
+    | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+    +-+---------------- 1 ----------------
+      | Traceback (most recent call last):
+      |
+      |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/httpx/_transports/default.py", line 101, in map_httpcore_exceptions
+      |     yield
+      |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/httpx/_transports/default.py", line 394, in handle_async_request
+      |     resp = await self._pool.handle_async_request(req)
+      |                  │    │     │                    └ <Request [b'POST']>
+      |                  │    │     └ <function AsyncConnectionPool.handle_async_request at 0x10c150cc0>
+      |                  │    └ <AsyncConnectionPool [Requests: 0 active, 0 queued | Connections: 0 active, 0 idle]>
+      |                  └ <httpx.AsyncHTTPTransport object at 0x10c08a1d0>
+      |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/httpcore/_async/connection_pool.py", line 256, in handle_async_request
+      |     raise exc from None
+      |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/httpcore/_async/connection_pool.py", line 236, in handle_async_request
+      |     response = await connection.handle_async_request(
+      |                      │          └ <function AsyncHTTPConnection.handle_async_request at 0x10c150040>
+      |                      └ <AsyncHTTPConnection [CONNECTION FAILED]>
+      |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/httpcore/_async/connection.py", line 101, in handle_async_request
+      |     raise exc
+      |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/httpcore/_async/connection.py", line 78, in handle_async_request
+      |     stream = await self._connect(request)
+      |                    │    │        └ <Request [b'POST']>
+      |                    │    └ <function AsyncHTTPConnection._connect at 0x10c1500e0>
+      |                    └ <AsyncHTTPConnection [CONNECTION FAILED]>
+      |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/httpcore/_async/connection.py", line 124, in _connect
+      |     stream = await self._network_backend.connect_tcp(**kwargs)
+      |                    │    │                │             └ {'host': 'localhost', 'port': 11434, 'local_address': None, 'timeout': 20.0, 'socket_options': None}
+      |                    │    │                └ <function AutoBackend.connect_tcp at 0x10c13a160>
+      |                    │    └ <httpcore._backends.auto.AutoBackend object at 0x10c088490>
+      |                    └ <AsyncHTTPConnection [CONNECTION FAILED]>
+      |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/httpcore/_backends/auto.py", line 31, in connect_tcp
+      |     return await self._backend.connect_tcp(
+      |                  │    │        └ <function AnyIOBackend.connect_tcp at 0x10c153880>
+      |                  │    └ <httpcore.AnyIOBackend object at 0x10bf059d0>
+      |                  └ <httpcore._backends.auto.AutoBackend object at 0x10c088490>
+      |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/httpcore/_backends/anyio.py", line 113, in connect_tcp
+      |     with map_exceptions(exc_map):
+      |          │              └ {<class 'TimeoutError'>: <class 'httpcore.ConnectTimeout'>, <class 'OSError'>: <class 'httpcore.ConnectError'>, <class 'anyio...
+      |          └ <function map_exceptions at 0x10c08e340>
+      |
+      |   File "/opt/homebrew/Cellar/python@3.11/3.11.14_2/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+      |     self.gen.throw(typ, value, traceback)
+      |     │    │   │     │    │      └ <traceback object at 0x10c165e00>
+      |     │    │   │     │    └ OSError('All connection attempts failed')
+      |     │    │   │     └ <class 'OSError'>
+      |     │    │   └ <method 'throw' of 'generator' objects>
+      |     │    └ <generator object map_exceptions at 0x10bfea840>
+      |     └ <contextlib._GeneratorContextManager object at 0x10c1648d0>
+      |
+      |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
+      |     raise to_exc(exc) from exc
+      |           └ <class 'httpcore.ConnectError'>
+      |
+      | httpcore.ConnectError: All connection attempts failed
+      |
+      |
+      | The above exception was the direct cause of the following exception:
+      |
+      |
+      | Traceback (most recent call last):
+      |
+      |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main 2/backend/app/agents/base.py", line 131, in execute
+      |     llm_output = await self._call_llm(client, history)
+      |                        │    │         │       └ [{'role': 'system', 'content': '\n                    You are a production-grade AI agent Optimizer. \n                    GO...
+      |                        │    │         └ <httpx.AsyncClient object at 0x10bfa1ed0>
+      |                        │    └ <function BaseAgent._call_llm at 0x10ba042c0>
+      |                        └ <app.agents.registry.ResearcherAgent object at 0x10b3bdbd0>
+      |
+      |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main 2/backend/app/agents/base.py", line 230, in _call_llm
+      |     response = await client.post(
+      |                      │      └ <function AsyncClient.post at 0x10b4d0220>
+      |                      └ <httpx.AsyncClient object at 0x10bfa1ed0>
+      |
+      |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/httpx/_client.py", line 1859, in post
+      |     return await self.request(
+      |                  │    └ <function AsyncClient.request at 0x10b4c3ba0>
+      |                  └ <httpx.AsyncClient object at 0x10bfa1ed0>
+      |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/httpx/_client.py", line 1540, in request
+      |     return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+      |                  │    │    │             │                      └ <httpx._client.UseClientDefault object at 0x10b4b4bd0>
+      |                  │    │    │             └ <httpx._client.UseClientDefault object at 0x10b4b4bd0>
+      |                  │    │    └ <Request('POST', 'http://localhost:11434/api/generate')>
+      |                  │    └ <function AsyncClient.send at 0x10b4c3d80>
+      |                  └ <httpx.AsyncClient object at 0x10bfa1ed0>
+      |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/httpx/_client.py", line 1629, in send
+      |     response = await self._send_handling_auth(
+      |                      │    └ <function AsyncClient._send_handling_auth at 0x10b4c3e20>
+      |                      └ <httpx.AsyncClient object at 0x10bfa1ed0>
+      |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/httpx/_client.py", line 1657, in _send_handling_auth
+      |     response = await self._send_handling_redirects(
+      |                      │    └ <function AsyncClient._send_handling_redirects at 0x10b4c3ec0>
+      |                      └ <httpx.AsyncClient object at 0x10bfa1ed0>
+      |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/httpx/_client.py", line 1694, in _send_handling_redirects
+      |     response = await self._send_single_request(request)
+      |                      │    │                    └ <Request('POST', 'http://localhost:11434/api/generate')>
+      |                      │    └ <function AsyncClient._send_single_request at 0x10b4c3f60>
+      |                      └ <httpx.AsyncClient object at 0x10bfa1ed0>
+      |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/httpx/_client.py", line 1730, in _send_single_request
+      |     response = await transport.handle_async_request(request)
+      |                      │         │                    └ <Request('POST', 'http://localhost:11434/api/generate')>
+      |                      │         └ <function AsyncHTTPTransport.handle_async_request at 0x10b4c0c20>
+      |                      └ <httpx.AsyncHTTPTransport object at 0x10c08a1d0>
+      |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/httpx/_transports/default.py", line 393, in handle_async_request
+      |     with map_httpcore_exceptions():
+      |          └ <function map_httpcore_exceptions at 0x10b4c0220>
+      |
+      |   File "/opt/homebrew/Cellar/python@3.11/3.11.14_2/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+      |     self.gen.throw(typ, value, traceback)
+      |     │    │   │     │    │      └ <traceback object at 0x10c165e80>
+      |     │    │   │     │    └ ConnectError(OSError('All connection attempts failed'))
+      |     │    │   │     └ <class 'httpcore.ConnectError'>
+      |     │    │   └ <method 'throw' of 'generator' objects>
+      |     │    └ <generator object map_httpcore_exceptions at 0x10c06c140>
+      |     └ <contextlib._GeneratorContextManager object at 0x10c164290>
+      |
+      |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/httpx/_transports/default.py", line 118, in map_httpcore_exceptions
+      |     raise mapped_exc(message) from exc
+      |           │          └ 'All connection attempts failed'
+      |           └ <class 'httpx.ConnectError'>
+      |
+      | httpx.ConnectError: All connection attempts failed
+      +------------------------------------
+2026-04-29 07:29:04.638 | INFO     | app.agents.base:execute:70 - [ResearcherAgent] Initiating intelligent execution. Budget: 5
+2026-04-29 07:30:53.395 | INFO     | app.agents.base:execute:171 - [ResearcherAgent] Executing 1 MCP tools in PARALLEL
+2026-04-29 07:31:25.666 | INFO     | app.agents.base:execute:171 - [ResearcherAgent] Executing 1 MCP tools in PARALLEL
+2026-04-29 07:32:31.833 | INFO     | app.agents.base:execute:171 - [ResearcherAgent] Executing 1 MCP tools in PARALLEL
+2026-04-29 07:34:32.421 | ERROR    | app.agents.base:execute:222 - [ResearcherAgent] Orchestration failure: unhandled errors in a TaskGroup (1 sub-exception)
+  + Exception Group Traceback (most recent call last):
+  |
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/bin/uvicorn", line 7, in <module>
+  |     sys.exit(main())
+  |     │   │    └ <Command main>
+  |     │   └ <built-in function exit>
+  |     └ <module 'sys' (built-in)>
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/click/core.py", line 1485, in __call__
+  |     return self.main(*args, **kwargs)
+  |            │    │     │       └ {}
+  |            │    │     └ ()
+  |            │    └ <function Command.main at 0x107becfe0>
+  |            └ <Command main>
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/click/core.py", line 1406, in main
+  |     rv = self.invoke(ctx)
+  |          │    │      └ <click.core.Context object at 0x107346c50>
+  |          │    └ <function Command.invoke at 0x107beccc0>
+  |          └ <Command main>
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/click/core.py", line 1269, in invoke
+  |     return ctx.invoke(self.callback, **ctx.params)
+  |            │   │      │    │           │   └ {'host': '0.0.0.0', 'port': 8000, 'app': 'app.main:app', 'uds': None, 'fd': None, 'reload': False, 'reload_dirs': (), 'reload...
+  |            │   │      │    │           └ <click.core.Context object at 0x107346c50>
+  |            │   │      │    └ <function main at 0x1083cd620>
+  |            │   │      └ <Command main>
+  |            │   └ <function Context.invoke at 0x107bdfec0>
+  |            └ <click.core.Context object at 0x107346c50>
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/click/core.py", line 824, in invoke
+  |     return callback(*args, **kwargs)
+  |            │         │       └ {'host': '0.0.0.0', 'port': 8000, 'app': 'app.main:app', 'uds': None, 'fd': None, 'reload': False, 'reload_dirs': (), 'reload...
+  |            │         └ ()
+  |            └ <function main at 0x1083cd620>
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/uvicorn/main.py", line 433, in main
+  |     run(
+  |     └ <function run at 0x107c82020>
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/uvicorn/main.py", line 606, in run
+  |     server.run()
+  |     │      └ <function Server.run at 0x107c818a0>
+  |     └ <uvicorn.server.Server object at 0x107c24d50>
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/uvicorn/server.py", line 75, in run
+  |     return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+  |            │           │    │             │                      │    │      └ <function Config.get_loop_factory at 0x107ba5a80>
+  |            │           │    │             │                      │    └ <uvicorn.config.Config object at 0x1073f0f90>
+  |            │           │    │             │                      └ <uvicorn.server.Server object at 0x107c24d50>
+  |            │           │    │             └ None
+  |            │           │    └ <function Server.serve at 0x107c81940>
+  |            │           └ <uvicorn.server.Server object at 0x107c24d50>
+  |            └ <function asyncio_run at 0x107bfd080>
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/uvicorn/_compat.py", line 30, in asyncio_run
+  |     return runner.run(main)
+  |            │      │   └ <coroutine object Server.serve at 0x1083173d0>
+  |            │      └ <function Runner.run at 0x10799ed40>
+  |            └ <asyncio.runners.Runner object at 0x1083d34d0>
+  |
+  |   File "/opt/homebrew/Cellar/python@3.11/3.11.14_2/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py", line 118, in run
+  |     return self._loop.run_until_complete(task)
+  |            │    │     │                  └ <Task pending name='Task-1' coro=<Server.serve() running at /Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/...
+  |            │    │     └ <function BaseEventLoop.run_until_complete at 0x10799c9a0>
+  |            │    └ <_UnixSelectorEventLoop running=True closed=False debug=False>
+  |            └ <asyncio.runners.Runner object at 0x1083d34d0>
+  |
+  |   File "/opt/homebrew/Cellar/python@3.11/3.11.14_2/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 641, in run_until_complete
+  |     self.run_forever()
+  |     │    └ <function BaseEventLoop.run_forever at 0x10799c900>
+  |     └ <_UnixSelectorEventLoop running=True closed=False debug=False>
+  |
+  |   File "/opt/homebrew/Cellar/python@3.11/3.11.14_2/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 608, in run_forever
+  |     self._run_once()
+  |     │    └ <function BaseEventLoop._run_once at 0x10799e700>
+  |     └ <_UnixSelectorEventLoop running=True closed=False debug=False>
+  |
+  |   File "/opt/homebrew/Cellar/python@3.11/3.11.14_2/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 1936, in _run_once
+  |     handle._run()
+  |     │      └ <function Handle._run at 0x1078f0860>
+  |     └ <Handle <TaskStepMethWrapper object at 0x10c162320>()>
+  |
+  |   File "/opt/homebrew/Cellar/python@3.11/3.11.14_2/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/events.py", line 84, in _run
+  |     self._context.run(self._callback, *self._args)
+  |     │    │            │    │           │    └ <member '_args' of 'Handle' objects>
+  |     │    │            │    │           └ <Handle <TaskStepMethWrapper object at 0x10c162320>()>
+  |     │    │            │    └ <member '_callback' of 'Handle' objects>
+  |     │    │            └ <Handle <TaskStepMethWrapper object at 0x10c162320>()>
+  |     │    └ <member '_context' of 'Handle' objects>
+  |     └ <Handle <TaskStepMethWrapper object at 0x10c162320>()>
+  |
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/starlette/middleware/base.py", line 144, in coro
+  |     await self.app(scope, receive_or_disconnect, send_no_error)
+  |           │    │   │      │                      └ <function BaseHTTPMiddleware.__call__.<locals>.call_next.<locals>.send_no_error at 0x10c0b6b60>
+  |           │    │   │      └ <function BaseHTTPMiddleware.__call__.<locals>.call_next.<locals>.receive_or_disconnect at 0x10c0b4220>
+  |           │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+  |           │    └ <starlette.middleware.cors.CORSMiddleware object at 0x10bf01c90>
+  |           └ <starlette.middleware.base.BaseHTTPMiddleware object at 0x1087543d0>
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/starlette/middleware/cors.py", line 96, in __call__
+  |     await self.simple_response(scope, receive, send, request_headers=headers)
+  |           │    │               │      │        │                     └ Headers({'host': 'localhost:8000', 'connection': 'keep-alive', 'content-length': '98', 'sec-ch-ua-platform': '"macOS"', 'user...
+  |           │    │               │      │        └ <function BaseHTTPMiddleware.__call__.<locals>.call_next.<locals>.send_no_error at 0x10c0b6b60>
+  |           │    │               │      └ <function BaseHTTPMiddleware.__call__.<locals>.call_next.<locals>.receive_or_disconnect at 0x10c0b4220>
+  |           │    │               └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+  |           │    └ <function CORSMiddleware.simple_response at 0x1093f04a0>
+  |           └ <starlette.middleware.cors.CORSMiddleware object at 0x10bf01c90>
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/starlette/middleware/cors.py", line 154, in simple_response
+  |     await self.app(scope, receive, send)
+  |           │    │   │      │        └ functools.partial(<bound method CORSMiddleware.send of <starlette.middleware.cors.CORSMiddleware object at 0x10bf01c90>>, sen...
+  |           │    │   │      └ <function BaseHTTPMiddleware.__call__.<locals>.call_next.<locals>.receive_or_disconnect at 0x10c0b4220>
+  |           │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+  |           │    └ <starlette.middleware.exceptions.ExceptionMiddleware object at 0x10bfd7810>
+  |           └ <starlette.middleware.cors.CORSMiddleware object at 0x10bf01c90>
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+  |     await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  |           │                            │    │    │     │      │        └ functools.partial(<bound method CORSMiddleware.send of <starlette.middleware.cors.CORSMiddleware object at 0x10bf01c90>>, sen...
+  |           │                            │    │    │     │      └ <function BaseHTTPMiddleware.__call__.<locals>.call_next.<locals>.receive_or_disconnect at 0x10c0b4220>
+  |           │                            │    │    │     └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+  |           │                            │    │    └ <starlette.requests.Request object at 0x10bf01d50>
+  |           │                            │    └ <fastapi.middleware.asyncexitstack.AsyncExitStackMiddleware object at 0x10bfa1c10>
+  |           │                            └ <starlette.middleware.exceptions.ExceptionMiddleware object at 0x10bfd7810>
+  |           └ <function wrap_app_handling_exceptions at 0x10933c720>
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+  |     await app(scope, receive, sender)
+  |           │   │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x10c0b5ee0>
+  |           │   │      └ <function BaseHTTPMiddleware.__call__.<locals>.call_next.<locals>.receive_or_disconnect at 0x10c0b4220>
+  |           │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+  |           └ <fastapi.middleware.asyncexitstack.AsyncExitStackMiddleware object at 0x10bfa1c10>
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+  |     await self.app(scope, receive, send)
+  |           │    │   │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x10c0b5ee0>
+  |           │    │   │      └ <function BaseHTTPMiddleware.__call__.<locals>.call_next.<locals>.receive_or_disconnect at 0x10c0b4220>
+  |           │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+  |           │    └ <fastapi.routing.APIRouter object at 0x10bf87d90>
+  |           └ <fastapi.middleware.asyncexitstack.AsyncExitStackMiddleware object at 0x10bfa1c10>
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/starlette/routing.py", line 660, in __call__
+  |     await self.middleware_stack(scope, receive, send)
+  |           │    │                │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x10c0b5ee0>
+  |           │    │                │      └ <function BaseHTTPMiddleware.__call__.<locals>.call_next.<locals>.receive_or_disconnect at 0x10c0b4220>
+  |           │    │                └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+  |           │    └ <bound method Router.app of <fastapi.routing.APIRouter object at 0x10bf87d90>>
+  |           └ <fastapi.routing.APIRouter object at 0x10bf87d90>
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/starlette/routing.py", line 680, in app
+  |     await route.handle(scope, receive, send)
+  |           │     │      │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x10c0b5ee0>
+  |           │     │      │      └ <function BaseHTTPMiddleware.__call__.<locals>.call_next.<locals>.receive_or_disconnect at 0x10c0b4220>
+  |           │     │      └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+  |           │     └ <function Route.handle at 0x10933dc60>
+  |           └ APIRoute(path='/run/', name='execute', methods=['POST'])
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/starlette/routing.py", line 276, in handle
+  |     await self.app(scope, receive, send)
+  |           │    │   │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x10c0b5ee0>
+  |           │    │   │      └ <function BaseHTTPMiddleware.__call__.<locals>.call_next.<locals>.receive_or_disconnect at 0x10c0b4220>
+  |           │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+  |           │    └ <function request_response.<locals>.app at 0x10bf8f060>
+  |           └ APIRoute(path='/run/', name='execute', methods=['POST'])
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/fastapi/routing.py", line 134, in app
+  |     await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  |           │                            │    │        │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x10c0b5ee0>
+  |           │                            │    │        │      └ <function BaseHTTPMiddleware.__call__.<locals>.call_next.<locals>.receive_or_disconnect at 0x10c0b4220>
+  |           │                            │    │        └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+  |           │                            │    └ <starlette.requests.Request object at 0x10c31f950>
+  |           │                            └ <function request_response.<locals>.app.<locals>.app at 0x10c0b5620>
+  |           └ <function wrap_app_handling_exceptions at 0x10933c720>
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+  |     await app(scope, receive, sender)
+  |           │   │      │        └ <function wrap_app_handling_exceptions.<locals>.wrapped_app.<locals>.sender at 0x10c0b5da0>
+  |           │   │      └ <function BaseHTTPMiddleware.__call__.<locals>.call_next.<locals>.receive_or_disconnect at 0x10c0b4220>
+  |           │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8000), 'cl...
+  |           └ <function request_response.<locals>.app.<locals>.app at 0x10c0b5620>
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/fastapi/routing.py", line 120, in app
+  |     response = await f(request)
+  |                      │ └ <starlette.requests.Request object at 0x10c31f950>
+  |                      └ <function get_request_handler.<locals>.app at 0x10bf8efc0>
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/fastapi/routing.py", line 674, in app
+  |     raw_response = await run_endpoint_function(
+  |                          └ <function run_endpoint_function at 0x10933fce0>
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/fastapi/routing.py", line 328, in run_endpoint_function
+  |     return await dependant.call(**values)
+  |                  │         │      └ {'db': <sqlalchemy.orm.session.Session object at 0x10c042c10>, 'exec_req': ExecutionRequest(mode='manual', agent_id='research...
+  |                  │         └ <function execute at 0x10b39aca0>
+  |                  └ Dependant(path_params=[], query_params=[], header_params=[], cookie_params=[], body_params=[ModelField(field_info=Body(Pydant...
+  |
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main 2/backend/app/routes/execution.py", line 47, in execute
+  |     return await Orchestrator.run_single(exec_req.agent_id, exec_req.input, tools=exec_req.tools)
+  |                  │            │          │        │         │        │            │        └ None
+  |                  │            │          │        │         │        │            └ ExecutionRequest(mode='manual', agent_id='researcher', agent_ids=None, input='Lightweight AI for irrigation pattern analysis'...
+  |                  │            │          │        │         │        └ 'Lightweight AI for irrigation pattern analysis'
+  |                  │            │          │        │         └ ExecutionRequest(mode='manual', agent_id='researcher', agent_ids=None, input='Lightweight AI for irrigation pattern analysis'...
+  |                  │            │          │        └ 'researcher'
+  |                  │            │          └ ExecutionRequest(mode='manual', agent_id='researcher', agent_ids=None, input='Lightweight AI for irrigation pattern analysis'...
+  |                  │            └ <staticmethod(<function Orchestrator.run_single at 0x10bee1580>)>
+  |                  └ <class 'app.services.orchestrator.Orchestrator'>
+  |
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main 2/backend/app/services/orchestrator.py", line 23, in run_single
+  |     result = await agent_instance.execute(input_text, tools=tools)
+  |                    │              │       │                 └ None
+  |                    │              │       └ 'Lightweight AI for irrigation pattern analysis'
+  |                    │              └ <function BaseAgent.execute at 0x10ba04220>
+  |                    └ <app.agents.registry.ResearcherAgent object at 0x10b3bdbd0>
+  |
+  | > File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main 2/backend/app/agents/base.py", line 83, in execute
+  |     async with stdio_client(server_params) as (read, write):
+  |                │            │                  │     └ MemoryObjectSendStream(_state=_MemoryObjectStreamState(max_buffer_size=0, buffer=deque([]), open_send_channels=0, open_receiv...
+  |                │            │                  └ MemoryObjectReceiveStream(_state=_MemoryObjectStreamState(max_buffer_size=0, buffer=deque([]), open_send_channels=0, open_rec...
+  |                │            └ StdioServerParameters(command='/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/bin/python3.11', args=['/Users/ma...
+  |                └ <function stdio_client at 0x10b9cd300>
+  |
+  |   File "/opt/homebrew/Cellar/python@3.11/3.11.14_2/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 231, in __aexit__
+  |     await self.gen.athrow(typ, value, traceback)
+  |           │    │   │      │    │      └ <traceback object at 0x10c32f4c0>
+  |           │    │   │      │    └ ExceptionGroup('unhandled errors in a TaskGroup', [ReadTimeout('')])
+  |           │    │   │      └ <class 'ExceptionGroup'>
+  |           │    │   └ <method 'athrow' of 'async_generator' objects>
+  |           │    └ <async_generator object stdio_client at 0x10bfee650>
+  |           └ <contextlib._AsyncGeneratorContextManager object at 0x10c356150>
+  |
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/mcp/client/stdio/__init__.py", line 182, in stdio_client
+  |     async with (
+  |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 799, in __aexit__
+  |     raise BaseExceptionGroup(
+  |
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Exception Group Traceback (most recent call last):
+    |
+    |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/mcp/client/stdio/__init__.py", line 189, in stdio_client
+    |     yield read_stream, write_stream
+    |           │            └ MemoryObjectSendStream(_state=_MemoryObjectStreamState(max_buffer_size=0, buffer=deque([]), open_send_channels=0, open_receiv...
+    |           └ MemoryObjectReceiveStream(_state=_MemoryObjectStreamState(max_buffer_size=0, buffer=deque([]), open_send_channels=0, open_rec...
+    |
+    |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main 2/backend/app/agents/base.py", line 84, in execute
+    |     async with ClientSession(read, write) as session:
+    |                │             │     │         └ <mcp.client.session.ClientSession object at 0x10c356b50>
+    |                │             │     └ MemoryObjectSendStream(_state=_MemoryObjectStreamState(max_buffer_size=0, buffer=deque([]), open_send_channels=0, open_receiv...
+    |                │             └ MemoryObjectReceiveStream(_state=_MemoryObjectStreamState(max_buffer_size=0, buffer=deque([]), open_send_channels=0, open_rec...
+    |                └ <class 'mcp.client.session.ClientSession'>
+    |
+    |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 799, in __aexit__
+    |     raise BaseExceptionGroup(
+    |
+    | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+    +-+---------------- 1 ----------------
+      | Traceback (most recent call last):
+      |
+      |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/httpx/_transports/default.py", line 101, in map_httpcore_exceptions
+      |     yield
+      |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/httpx/_transports/default.py", line 394, in handle_async_request
+      |     resp = await self._pool.handle_async_request(req)
+      |                  │    │     │                    └ <Request [b'POST']>
+      |                  │    │     └ <function AsyncConnectionPool.handle_async_request at 0x10c150cc0>
+      |                  │    └ <AsyncConnectionPool [Requests: 0 active, 0 queued | Connections: 0 active, 0 idle]>
+      |                  └ <httpx.AsyncHTTPTransport object at 0x10c34c310>
+      |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/httpcore/_async/connection_pool.py", line 256, in handle_async_request
+      |     raise exc from None
+      |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/httpcore/_async/connection_pool.py", line 236, in handle_async_request
+      |     response = await connection.handle_async_request(
+      |                      │          └ <function AsyncHTTPConnection.handle_async_request at 0x10c150040>
+      |                      └ <AsyncHTTPConnection ['http://localhost:11434', HTTP/1.1, CLOSED, Request Count: 4]>
+      |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/httpcore/_async/connection.py", line 103, in handle_async_request
+      |     return await self._connection.handle_async_request(request)
+      |                  │    │           │                    └ <Request [b'POST']>
+      |                  │    │           └ <function AsyncHTTP11Connection.handle_async_request at 0x10c13ade0>
+      |                  │    └ <AsyncHTTP11Connection ['http://localhost:11434', CLOSED, Request Count: 4]>
+      |                  └ <AsyncHTTPConnection ['http://localhost:11434', HTTP/1.1, CLOSED, Request Count: 4]>
+      |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/httpcore/_async/http11.py", line 136, in handle_async_request
+      |     raise exc
+      |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/httpcore/_async/http11.py", line 106, in handle_async_request
+      |     ) = await self._receive_response_headers(**kwargs)
+      |               │    │                           └ {'request': <Request [b'POST']>}
+      |               │    └ <function AsyncHTTP11Connection._receive_response_headers at 0x10c13b060>
+      |               └ <AsyncHTTP11Connection ['http://localhost:11434', CLOSED, Request Count: 4]>
+      |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/httpcore/_async/http11.py", line 177, in _receive_response_headers
+      |     event = await self._receive_event(timeout=timeout)
+      |                   │    │                      └ 120.0
+      |                   │    └ <function AsyncHTTP11Connection._receive_event at 0x10c13b1a0>
+      |                   └ <AsyncHTTP11Connection ['http://localhost:11434', CLOSED, Request Count: 4]>
+      |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/httpcore/_async/http11.py", line 217, in _receive_event
+      |     data = await self._network_stream.read(
+      |                  │    │               └ <function AnyIOStream.read at 0x10c153560>
+      |                  │    └ <httpcore._backends.anyio.AnyIOStream object at 0x10c14fe90>
+      |                  └ <AsyncHTTP11Connection ['http://localhost:11434', CLOSED, Request Count: 4]>
+      |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/httpcore/_backends/anyio.py", line 32, in read
+      |     with map_exceptions(exc_map):
+      |          │              └ {<class 'TimeoutError'>: <class 'httpcore.ReadTimeout'>, <class 'anyio.BrokenResourceError'>: <class 'httpcore.ReadError'>, <...
+      |          └ <function map_exceptions at 0x10c08e340>
+      |
+      |   File "/opt/homebrew/Cellar/python@3.11/3.11.14_2/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+      |     self.gen.throw(typ, value, traceback)
+      |     │    │   │     │    │      └ <traceback object at 0x10c35c780>
+      |     │    │   │     │    └ TimeoutError()
+      |     │    │   │     └ <class 'TimeoutError'>
+      |     │    │   └ <method 'throw' of 'generator' objects>
+      |     │    └ <generator object map_exceptions at 0x10c380040>
+      |     └ <contextlib._GeneratorContextManager object at 0x10c356d10>
+      |
+      |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
+      |     raise to_exc(exc) from exc
+      |           └ <class 'httpcore.ReadTimeout'>
+      |
+      | httpcore.ReadTimeout
+      |
+      |
+      | The above exception was the direct cause of the following exception:
+      |
+      |
+      | Traceback (most recent call last):
+      |
+      |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main 2/backend/app/agents/base.py", line 131, in execute
+      |     llm_output = await self._call_llm(client, history)
+      |                        │    │         │       └ [{'role': 'system', 'content': '\n                    You are a production-grade AI agent Optimizer. \n                    GO...
+      |                        │    │         └ <httpx.AsyncClient object at 0x10c34c850>
+      |                        │    └ <function BaseAgent._call_llm at 0x10ba042c0>
+      |                        └ <app.agents.registry.ResearcherAgent object at 0x10b3bdbd0>
+      |
+      |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main 2/backend/app/agents/base.py", line 230, in _call_llm
+      |     response = await client.post(
+      |                      │      └ <function AsyncClient.post at 0x10b4d0220>
+      |                      └ <httpx.AsyncClient object at 0x10c34c850>
+      |
+      |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/httpx/_client.py", line 1859, in post
+      |     return await self.request(
+      |                  │    └ <function AsyncClient.request at 0x10b4c3ba0>
+      |                  └ <httpx.AsyncClient object at 0x10c34c850>
+      |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/httpx/_client.py", line 1540, in request
+      |     return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+      |                  │    │    │             │                      └ <httpx._client.UseClientDefault object at 0x10b4b4bd0>
+      |                  │    │    │             └ <httpx._client.UseClientDefault object at 0x10b4b4bd0>
+      |                  │    │    └ <Request('POST', 'http://localhost:11434/api/generate')>
+      |                  │    └ <function AsyncClient.send at 0x10b4c3d80>
+      |                  └ <httpx.AsyncClient object at 0x10c34c850>
+      |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/httpx/_client.py", line 1629, in send
+      |     response = await self._send_handling_auth(
+      |                      │    └ <function AsyncClient._send_handling_auth at 0x10b4c3e20>
+      |                      └ <httpx.AsyncClient object at 0x10c34c850>
+      |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/httpx/_client.py", line 1657, in _send_handling_auth
+      |     response = await self._send_handling_redirects(
+      |                      │    └ <function AsyncClient._send_handling_redirects at 0x10b4c3ec0>
+      |                      └ <httpx.AsyncClient object at 0x10c34c850>
+      |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/httpx/_client.py", line 1694, in _send_handling_redirects
+      |     response = await self._send_single_request(request)
+      |                      │    │                    └ <Request('POST', 'http://localhost:11434/api/generate')>
+      |                      │    └ <function AsyncClient._send_single_request at 0x10b4c3f60>
+      |                      └ <httpx.AsyncClient object at 0x10c34c850>
+      |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/httpx/_client.py", line 1730, in _send_single_request
+      |     response = await transport.handle_async_request(request)
+      |                      │         │                    └ <Request('POST', 'http://localhost:11434/api/generate')>
+      |                      │         └ <function AsyncHTTPTransport.handle_async_request at 0x10b4c0c20>
+      |                      └ <httpx.AsyncHTTPTransport object at 0x10c34c310>
+      |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/httpx/_transports/default.py", line 393, in handle_async_request
+      |     with map_httpcore_exceptions():
+      |          └ <function map_httpcore_exceptions at 0x10b4c0220>
+      |
+      |   File "/opt/homebrew/Cellar/python@3.11/3.11.14_2/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+      |     self.gen.throw(typ, value, traceback)
+      |     │    │   │     │    │      └ <traceback object at 0x10c35db40>
+      |     │    │   │     │    └ ReadTimeout(TimeoutError())
+      |     │    │   │     └ <class 'httpcore.ReadTimeout'>
+      |     │    │   └ <method 'throw' of 'generator' objects>
+      |     │    └ <generator object map_httpcore_exceptions at 0x10c20b540>
+      |     └ <contextlib._GeneratorContextManager object at 0x10c357390>
+      |
+      |   File "/Users/madhav_tripathi/Downloads/AgentMarketplace-main/.venv/lib/python3.11/site-packages/httpx/_transports/default.py", line 118, in map_httpcore_exceptions
+      |     raise mapped_exc(message) from exc
+      |           │          └ ''
+      |           └ <class 'httpx.ReadTimeout'>
+      |
+      | httpx.ReadTimeout
+      +------------------------------------
+2026-04-29 07:42:37.345 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: calculator
+2026-04-29 07:42:37.346 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: text_stats
+2026-04-29 07:42:37.346 | INFO     | app.tools.registry:register:24 - [ToolRegistry] Registered tool: search
+2026-04-29 07:44:15.727 | INFO     | app.agents.base:execute:70 - [ResearcherAgent] Initiating intelligent execution. Budget: 5
+2026-04-29 07:44:41.422 | INFO     | app.agents.base:execute:171 - [ResearcherAgent] Executing 2 MCP tools in PARALLEL
+2026-04-29 07:44:53.272 | SUCCESS  | app.agents.base:execute:203 - [ResearcherAgent] Mission accomplished in 37.55s (2 tools)
+2026-04-29 08:29:06.346 | INFO     | app.agents.base:execute:70 - [ResearcherAgent] Initiating intelligent execution. Budget: 5
+2026-04-29 08:29:30.938 | INFO     | app.agents.base:execute:171 - [ResearcherAgent] Executing 2 MCP tools in PARALLEL
+2026-04-29 08:29:39.006 | INFO     | app.agents.base:execute:171 - [ResearcherAgent] Executing 1 MCP tools in PARALLEL
+2026-04-29 08:29:53.414 | SUCCESS  | app.agents.base:execute:203 - [ResearcherAgent] Mission accomplished in 47.07s (3 tools)
