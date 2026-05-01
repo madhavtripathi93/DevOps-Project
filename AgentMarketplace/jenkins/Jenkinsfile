@@ -1,0 +1,130 @@
+pipeline {
+    agent any
+
+    // Environment Variables
+    environment {
+        // Docker image settings
+        DOCKER_REGISTRY   = "docker.io" // Use the docker.io registry since it's DockerHub
+        DOCKER_USER       = credentials('dockerhub-user') // We'll need a separate username variable, or parse from creds
+        IMAGE_TAG         = "${env.BUILD_NUMBER}-${env.GIT_COMMIT?.take(7) ?: 'latest'}"
+        
+        BACKEND_IMAGE     = "${DOCKER_USER}/agent-backend"
+        FRONTEND_IMAGE    = "${DOCKER_USER}/agent-frontend"
+
+        // Kubernetes settings
+        K8S_NAMESPACE     = 'devops-project'
+        KUBECONFIG        = credentials('kubeconfig-creds')  // kubeconfig file credential
+    }
+
+    // Pipeline Options
+    options {
+        timeout(time: 30, unit: 'MINUTES')
+        buildDiscarder(logRotator(numToKeepStr: '10'))
+        timestamps()
+        disableConcurrentBuilds()
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                echo 'Pulling source code from repository...'
+                checkout scm
+                
+                script {
+                    env.GIT_COMMIT_MSG = sh(script: 'git log -1 --pretty=%B', returnStdout: true).trim()
+                    echo "Commit: ${env.GIT_COMMIT}"
+                }
+            }
+        }
+
+        stage('Build Backend') {
+            steps {
+                echo "Building Backend Docker image"
+                sh """
+                    cd "AgentMarketplace-main 2/backend" && docker build \
+                        -t ${BACKEND_IMAGE}:${IMAGE_TAG} \
+                        -t ${BACKEND_IMAGE}:latest \
+                        .
+                """
+            }
+        }
+
+        stage('Build Frontend') {
+            steps {
+                echo "🔨 Building Frontend Docker image"
+                sh """
+                    cd "AgentMarketplace-main 2/frontend" && docker build \
+                        -t ${FRONTEND_IMAGE}:${IMAGE_TAG} \
+                        -t ${FRONTEND_IMAGE}:latest \
+                        .
+                """
+            }
+        }
+
+        stage('Push to Registry') {
+            steps {
+                echo "Pushing images to registry: ${DOCKER_REGISTRY}"
+                withCredentials([usernamePassword(
+                    credentialsId: 'docker-registry-creds',
+                    usernameVariable: 'DOCKER_USER_CREDS',
+                    passwordVariable: 'DOCKER_PASS'
+                )]) {
+                    sh """
+                        echo \$DOCKER_PASS | docker login -u \$DOCKER_USER_CREDS --password-stdin
+                        docker push ${BACKEND_IMAGE}:${IMAGE_TAG}
+                        docker push ${BACKEND_IMAGE}:latest
+                        docker push ${FRONTEND_IMAGE}:${IMAGE_TAG}
+                        docker push ${FRONTEND_IMAGE}:latest
+                        docker logout
+                    """
+                }
+            }
+        }
+
+        stage('Deploy to Kubernetes') {
+            steps {
+                echo "Deploying to Kubernetes namespace: ${K8S_NAMESPACE}"
+
+                // Ensure namespace exists
+                sh "kubectl apply -f kubernetes/namespace.yaml"
+
+                // Apply MySQL first
+                sh "kubectl apply -f kubernetes/agent-marketplace/mysql.yaml -n ${K8S_NAMESPACE}"
+
+                // Update the images in the deployment manifests
+                sh """
+                    sed -i 's|DOCKER_REGISTRY/agent-backend:latest|${BACKEND_IMAGE}:${IMAGE_TAG}|g' kubernetes/agent-marketplace/backend.yaml
+                    sed -i 's|DOCKER_REGISTRY/agent-frontend:latest|${FRONTEND_IMAGE}:${IMAGE_TAG}|g' kubernetes/agent-marketplace/frontend.yaml
+                """
+
+                // Apply Backend and Frontend manifests
+                sh """
+                    kubectl apply -f kubernetes/agent-marketplace/backend.yaml -n ${K8S_NAMESPACE}
+                    kubectl apply -f kubernetes/agent-marketplace/frontend.yaml -n ${K8S_NAMESPACE}
+                """
+
+                // Wait for rollout to complete
+                sh """
+                    kubectl rollout status deployment/agent-backend -n ${K8S_NAMESPACE} --timeout=300s || true
+                    kubectl rollout status deployment/agent-frontend -n ${K8S_NAMESPACE} --timeout=300s || true
+                """
+            }
+        }
+    }
+
+    post {
+        success {
+            echo "PIPELINE SUCCEEDED"
+        }
+        failure {
+            echo "PIPELINE FAILED"
+        }
+        always {
+            sh """
+                docker rmi ${BACKEND_IMAGE}:${IMAGE_TAG} 2>/dev/null || true
+                docker rmi ${FRONTEND_IMAGE}:${IMAGE_TAG} 2>/dev/null || true
+            """
+            cleanWs()
+        }
+    }
+}
