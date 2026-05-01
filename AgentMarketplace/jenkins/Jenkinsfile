@@ -22,12 +22,13 @@ pipeline {
         // ── 1. Checkout ─────────────────────────────────────────────
         stage('Checkout') {
             steps {
+                cleanWs()
                 echo 'Pulling source code...'
                 checkout scm
             }
         }
 
-        // ── 2. Test (optional but recommended) ──────────────────────
+        // ── 2. Test ─────────────────────────────────────────────────
         stage('Test') {
             parallel {
                 stage('Test Backend') {
@@ -75,7 +76,7 @@ pipeline {
             }
         }
 
-        // ── 4. Push ─────────────────────────────────────────────────
+        // ── 4. Push (FIXED) ─────────────────────────────────────────
         stage('Push to DockerHub') {
             steps {
                 withCredentials([usernamePassword(
@@ -83,25 +84,18 @@ pipeline {
                     usernameVariable: 'DOCKER_USER',
                     passwordVariable: 'DOCKER_PASS'
                 )]) {
-                    sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
+                    sh '''
+                        echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+
+                        docker push $BACKEND_IMAGE:$IMAGE_TAG
+                        docker push $BACKEND_IMAGE:latest
+
+                        docker push $FRONTEND_IMAGE:$IMAGE_TAG
+                        docker push $FRONTEND_IMAGE:latest
+
+                        docker logout
+                    '''
                 }
-
-                parallel(
-                    'Push Backend': {
-                        sh '''
-                            docker push $BACKEND_IMAGE:$IMAGE_TAG
-                            docker push $BACKEND_IMAGE:latest
-                        '''
-                    },
-                    'Push Frontend': {
-                        sh '''
-                            docker push $FRONTEND_IMAGE:$IMAGE_TAG
-                            docker push $FRONTEND_IMAGE:latest
-                        '''
-                    }
-                )
-
-                sh 'docker logout'
             }
         }
 
