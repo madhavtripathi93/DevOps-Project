@@ -34,6 +34,8 @@ spec:
               value: "agent-mysql"
             - name: DB_NAME
               value: "agent_marketplace"
+            - name: DATABASE_URL
+              value: "mysql+mysqlconnector://root:your_password@agent-mysql/agent_marketplace"
             - name: ALLOWED_ORIGINS
               value: "*"
             - name: MAIN_AGENT_API_KEY

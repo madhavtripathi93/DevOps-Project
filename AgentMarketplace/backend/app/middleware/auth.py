@@ -30,10 +30,6 @@ async def api_key_middleware(request: Request, call_next):
             content={"error": "unauthorized", "message": "Invalid API Key"}
         )
     
-    # Increment usage count
-    user.usage_count += 1
-    db.commit()
-    
     # Store user in request state
     request.state.user = user
     response = await call_next(request)
