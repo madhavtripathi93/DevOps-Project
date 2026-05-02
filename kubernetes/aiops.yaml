@@ -1,0 +1,73 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: aiops-service-account
+  namespace: devops-project
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: aiops-role
+  namespace: devops-project
+rules:
+  # Permissions to restart pods
+  - apiGroups: [""]
+    resources: ["pods"]
+    verbs: ["get", "list", "watch", "delete"]
+  # Permissions to scale/rollback deployments
+  - apiGroups: ["apps"]
+    resources: ["deployments", "deployments/scale"]
+    verbs: ["get", "list", "watch", "patch", "update"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: aiops-role-binding
+  namespace: devops-project
+subjects:
+  - kind: ServiceAccount
+    name: aiops-service-account
+    namespace: devops-project
+roleRef:
+  kind: Role
+  name: aiops-role
+  apiGroup: rbac.authorization.k8s.io
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: agent-aiops
+  namespace: devops-project
+  labels:
+    app: agent-aiops
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: agent-aiops
+  template:
+    metadata:
+      labels:
+        app: agent-aiops
+    spec:
+      serviceAccountName: aiops-service-account
+      containers:
+        - name: agent-aiops
+          image: DOCKER_REGISTRY/agent-aiops:latest
+          imagePullPolicy: Always
+          env:
+            - name: APP_SERVICE_URL
+              value: "http://agent-backend:8000"
+            - name: K8S_NAMESPACE
+              value: "devops-project"
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "250m"
+              memory: "256Mi"

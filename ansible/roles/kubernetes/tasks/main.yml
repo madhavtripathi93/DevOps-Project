@@ -18,7 +18,7 @@
 - name: "[macOS] Install kubectl via Homebrew"
   ansible.builtin.command: brew install kubectl
   when:
-    - ansible_os_family == "Darwin"
+    - ansible_facts['os_family'] == "Darwin"
     - kubectl_installed.rc != 0
   register: kubectl_install
   changed_when: kubectl_install.rc == 0
@@ -30,7 +30,7 @@
     mode: "0755"
   become: true
   when:
-    - ansible_os_family != "Darwin"
+    - ansible_facts['os_family'] != "Darwin"
     - kubectl_installed.rc != 0
 
 # ---------- Minikube Installation ----------
@@ -44,7 +44,7 @@
 - name: "[macOS] Install Minikube via Homebrew"
   ansible.builtin.command: brew install minikube
   when:
-    - ansible_os_family == "Darwin"
+    - ansible_facts['os_family'] == "Darwin"
     - minikube_installed.rc != 0
   register: minikube_install
   changed_when: minikube_install.rc == 0
@@ -56,7 +56,7 @@
     mode: "0755"
   become: true
   when:
-    - ansible_os_family != "Darwin"
+    - ansible_facts['os_family'] != "Darwin"
     - minikube_installed.rc != 0
 
 # ---------- Verification ----------

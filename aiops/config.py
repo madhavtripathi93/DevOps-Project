@@ -7,12 +7,14 @@ All thresholds, intervals, and Kubernetes settings are defined here.
 =============================================================================
 """
 
+import os
+
 # =============================================================================
 # Kubernetes Settings
 # =============================================================================
 
 # Namespace where the application is deployed
-K8S_NAMESPACE = "devops-project"
+K8S_NAMESPACE = os.environ.get("K8S_NAMESPACE", "devops-project")
 
 # Name of the Kubernetes deployment to monitor
 K8S_DEPLOYMENT = "agent-backend"
@@ -99,8 +101,8 @@ DRY_RUN = False
 # =============================================================================
 
 # URL of the application service (for health checks and metrics)
-# We will use the agent-frontend or backend. For health checks, backend is best.
-APP_SERVICE_URL = "http://100.55.22.16:30080"
+# We will use the internal Kubernetes DNS name by default
+APP_SERVICE_URL = os.environ.get("APP_SERVICE_URL", "http://agent-backend:8000")
 
 # =============================================================================
 # Logging Settings

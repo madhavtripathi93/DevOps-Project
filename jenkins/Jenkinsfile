@@ -10,6 +10,7 @@ pipeline {
         
         BACKEND_IMAGE     = "${DOCKER_USER}/agent-backend"
         FRONTEND_IMAGE    = "${DOCKER_USER}/agent-frontend"
+        AIOPS_IMAGE       = "${DOCKER_USER}/agent-aiops"
 
         // Kubernetes settings
         K8S_NAMESPACE     = 'devops-project'
@@ -61,6 +62,18 @@ pipeline {
             }
         }
 
+        stage('Build AIOps') {
+            steps {
+                echo "🤖 Building AIOps Docker image"
+                sh """
+                    cd "aiops" && docker build \
+                        -t ${AIOPS_IMAGE}:${IMAGE_TAG} \
+                        -t ${AIOPS_IMAGE}:latest \
+                        .
+                """
+            }
+        }
+
         stage('Push to Registry') {
             steps {
                 echo "Pushing images to registry: ${DOCKER_REGISTRY}"
@@ -75,6 +88,8 @@ pipeline {
                         docker push ${BACKEND_IMAGE}:latest
                         docker push ${FRONTEND_IMAGE}:${IMAGE_TAG}
                         docker push ${FRONTEND_IMAGE}:latest
+                        docker push ${AIOPS_IMAGE}:${IMAGE_TAG}
+                        docker push ${AIOPS_IMAGE}:latest
                         docker logout
                     """
                 }
@@ -89,24 +104,27 @@ pipeline {
                 sh "kubectl apply -f kubernetes/namespace.yaml"
 
                 // Apply MySQL first
-                sh "kubectl apply -f kubernetes/agent-marketplace/mysql.yaml -n ${K8S_NAMESPACE}"
+                sh "kubectl apply -f kubernetes/mysql.yaml -n ${K8S_NAMESPACE}"
 
                 // Update the images in the deployment manifests
                 sh """
-                    sed -i 's|DOCKER_REGISTRY/agent-backend:latest|${BACKEND_IMAGE}:${IMAGE_TAG}|g' kubernetes/agent-marketplace/backend.yaml
-                    sed -i 's|DOCKER_REGISTRY/agent-frontend:latest|${FRONTEND_IMAGE}:${IMAGE_TAG}|g' kubernetes/agent-marketplace/frontend.yaml
+                    sed -i 's|DOCKER_REGISTRY/agent-backend:latest|${BACKEND_IMAGE}:${IMAGE_TAG}|g' kubernetes/backend.yaml
+                    sed -i 's|DOCKER_REGISTRY/agent-frontend:latest|${FRONTEND_IMAGE}:${IMAGE_TAG}|g' kubernetes/frontend.yaml
+                    sed -i 's|DOCKER_REGISTRY/agent-aiops:latest|${AIOPS_IMAGE}:${IMAGE_TAG}|g' kubernetes/aiops.yaml
                 """
 
                 // Apply Backend and Frontend manifests
                 sh """
-                    kubectl apply -f kubernetes/agent-marketplace/backend.yaml -n ${K8S_NAMESPACE}
-                    kubectl apply -f kubernetes/agent-marketplace/frontend.yaml -n ${K8S_NAMESPACE}
+                    kubectl apply -f kubernetes/backend.yaml -n ${K8S_NAMESPACE}
+                    kubectl apply -f kubernetes/frontend.yaml -n ${K8S_NAMESPACE}
+                    kubectl apply -f kubernetes/aiops.yaml -n ${K8S_NAMESPACE}
                 """
 
                 // Wait for rollout to complete
                 sh """
                     kubectl rollout status deployment/agent-backend -n ${K8S_NAMESPACE} --timeout=300s || true
                     kubectl rollout status deployment/agent-frontend -n ${K8S_NAMESPACE} --timeout=300s || true
+                    kubectl rollout status deployment/agent-aiops -n ${K8S_NAMESPACE} --timeout=300s || true
                 """
             }
         }
@@ -123,6 +141,8 @@ pipeline {
             sh """
                 docker rmi ${BACKEND_IMAGE}:${IMAGE_TAG} 2>/dev/null || true
                 docker rmi ${FRONTEND_IMAGE}:${IMAGE_TAG} 2>/dev/null || true
+                docker rmi ${AIOPS_IMAGE}:${IMAGE_TAG} 2>/dev/null || true
+                docker system prune -af --volumes || true
             """
             cleanWs()
         }

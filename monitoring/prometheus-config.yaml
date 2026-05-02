@@ -59,6 +59,6 @@ data:
       # Fallback: static config for direct scraping (works without K8s SD)
       - job_name: 'devops-app-static'
         static_configs:
-          - targets: ['devops-app-service.devops-project.svc.cluster.local:80']
+          - targets: ['agent-backend.devops-project.svc.cluster.local:8000']
         metrics_path: /metrics
         scrape_interval: 10s

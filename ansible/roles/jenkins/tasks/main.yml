@@ -21,6 +21,8 @@
   ansible.builtin.file:
     path: "{{ jenkins_home }}"
     state: directory
+    owner: "1000"
+    group: "1000"
     mode: "0755"
 
 # ---------- Check Existing Container ----------
@@ -38,6 +40,7 @@
     docker run -d
     --name {{ jenkins_container_name }}
     --restart=unless-stopped
+    -u root
     -p {{ jenkins_port }}:8080
     -p 50000:50000
     -v {{ jenkins_home }}:/var/jenkins_home

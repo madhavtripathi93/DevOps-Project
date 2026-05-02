@@ -8,6 +8,7 @@ from app.models.base import Base
 from app.database.seed import seed_agents, seed_tools
 from app.routes import auth, agents, execution, health, workflows, deployments, tools
 from app.middleware.auth import api_key_middleware
+from prometheus_fastapi_instrumentator import Instrumentator
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
@@ -29,6 +30,9 @@ def init_db():
 init_db()
 
 app = FastAPI(title="Agent Marketplace API")
+
+# Expose /metrics endpoint for Prometheus
+Instrumentator().instrument(app).expose(app)
 
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception):

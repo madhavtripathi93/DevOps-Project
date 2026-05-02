@@ -22,3 +22,4 @@ langchain-openai
 langchain-anthropic
 langchain-groq
 langchain-experimental
+prometheus-fastapi-instrumentator

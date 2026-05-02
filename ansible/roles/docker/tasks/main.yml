@@ -14,12 +14,12 @@
   register: docker_installed
   changed_when: false
   failed_when: false
-  when: ansible_os_family == "Darwin"
+  when: ansible_facts['os_family'] == "Darwin"
 
 - name: "[macOS] Install Docker Desktop via Homebrew Cask"
   ansible.builtin.command: brew install --cask docker
   when:
-    - ansible_os_family == "Darwin"
+    - ansible_facts['os_family'] == "Darwin"
     - docker_installed.rc != 0
   register: docker_install_result
   changed_when: docker_install_result.rc == 0
@@ -31,7 +31,7 @@
       Please start Docker Desktop from Applications if it's not running.
       You can verify with: docker ps
   when:
-    - ansible_os_family == "Darwin"
+    - ansible_facts['os_family'] == "Darwin"
     - docker_installed.rc != 0
 
 # ---------- Linux Installation (apt-based distributions) ----------
@@ -47,7 +47,7 @@
     state: present
     update_cache: true
   become: true
-  when: ansible_os_family == "Debian"
+  when: ansible_facts['os_family'] == "Debian"
 
 - name: "[Linux] Create keyrings directory"
   ansible.builtin.file:
@@ -55,7 +55,7 @@
     state: directory
     mode: '0755'
   become: true
-  when: ansible_os_family == "Debian"
+  when: ansible_facts['os_family'] == "Debian"
 
 - name: "[Linux] Add Docker GPG key"
   ansible.builtin.get_url:
@@ -63,14 +63,14 @@
     dest: /etc/apt/keyrings/docker.asc
     mode: '0644'
   become: true
-  when: ansible_os_family == "Debian"
+  when: ansible_facts['os_family'] == "Debian"
 
 - name: "[Linux] Add Docker repository"
   ansible.builtin.apt_repository:
-    repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+    repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu {{ ansible_facts['distribution_release'] }} stable"
     state: present
   become: true
-  when: ansible_os_family == "Debian"
+  when: ansible_facts['os_family'] == "Debian"
 
 - name: "[Linux] Install Docker Engine"
   ansible.builtin.apt:
@@ -82,7 +82,7 @@
     state: present
     update_cache: true
   become: true
-  when: ansible_os_family == "Debian"
+  when: ansible_facts['os_family'] == "Debian"
 
 - name: "[Linux] Start and enable Docker service"
   ansible.builtin.systemd:
@@ -90,15 +90,15 @@
     state: started
     enabled: true
   become: true
-  when: ansible_os_family == "Debian"
+  when: ansible_facts['os_family'] == "Debian"
 
 - name: "[Linux] Add current user to docker group"
   ansible.builtin.user:
-    name: "{{ ansible_user_id }}"
+    name: "{{ ansible_facts['user_id'] }}"
     groups: docker
     append: true
   become: true
-  when: ansible_os_family == "Debian"
+  when: ansible_facts['os_family'] == "Debian"
 
 # ---------- Verification (All platforms) ----------
 

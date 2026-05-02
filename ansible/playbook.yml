@@ -37,9 +37,9 @@
     - name: Display system information
       ansible.builtin.debug:
         msg: |
-          System: {{ ansible_os_family }} ({{ ansible_distribution }})
-          Architecture: {{ ansible_architecture }}
-          Python: {{ ansible_python_version }}
+          System: {{ ansible_facts['os_family'] }} ({{ ansible_facts['distribution'] }})
+          Architecture: {{ ansible_facts['architecture'] }}
+          Python: {{ ansible_facts['python_version'] }}
 
   roles:
     - role: docker
