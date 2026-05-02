@@ -5,7 +5,7 @@ pipeline {
     environment {
         // Docker image settings
         DOCKER_REGISTRY   = "docker.io" // Use the docker.io registry since it's DockerHub
-        DOCKER_USER       = credentials('dockerhub-user') // We'll need a separate username variable, or parse from creds
+        DOCKER_USER       = "madhavtripathi93" // Hardcoded to your DockerHub username
         IMAGE_TAG         = "${env.BUILD_NUMBER}-${env.GIT_COMMIT?.take(7) ?: 'latest'}"
         
         BACKEND_IMAGE     = "${DOCKER_USER}/agent-backend"
