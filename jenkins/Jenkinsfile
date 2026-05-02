@@ -64,7 +64,7 @@ pipeline {
 
         stage('Build AIOps') {
             steps {
-                echo "🤖 Building AIOps Docker image"
+                echo "Building AIOps Docker image"
                 sh """
                     cd "aiops" && docker build \
                         -t ${AIOPS_IMAGE}:${IMAGE_TAG} \
@@ -99,6 +99,9 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 echo "Deploying to Kubernetes namespace: ${K8S_NAMESPACE}"
+
+                // Ensure Jenkins is on the minikube network so it can reach the API
+                sh "docker network connect devops-cluster jenkins-devops || true"
 
                 // Ensure namespace exists
                 sh "kubectl apply -f kubernetes/namespace.yaml"
