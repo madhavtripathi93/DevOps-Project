@@ -87,14 +87,18 @@ def simulate_pod_crash():
 
         if result.returncode == 0 and result.stdout:
             pod_name = result.stdout.strip()
-            logger.info(f"Deleting pod: {pod_name}")
+            logger.info(f"Triggering crash loop inside pod: {pod_name}")
 
-            subprocess.run(
-                ["kubectl", "delete", "pod", pod_name,
-                 "-n", config.K8S_NAMESPACE, "--grace-period=0", "--force"],
-                timeout=15
-            )
-            logger.info(f"Pod {pod_name} deleted. K8s will recreate it.")
+            for i in range(1, 6):
+                subprocess.run(
+                    ["kubectl", "exec", pod_name, "-n", config.K8S_NAMESPACE, 
+                     "--", "sh", "-c", "kill 1"],
+                    timeout=15, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
+                )
+                logger.info(f"Crash #{i}/5 triggered. Waiting for Kubelet restart...")
+                time.sleep(5)
+                
+            logger.info(f"Crash loop simulation complete for {pod_name}.")
         else:
             logger.warning("No pods found. Is the deployment running?")
 
