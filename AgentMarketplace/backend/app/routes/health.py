@@ -39,7 +39,7 @@ async def health_check(response: Response, db: Session = Depends(get_db)):
         health_status["services"]["database"]["message"] = str(e)
         is_healthy = False
 
-    # 2. Check Ollama
+    # 2. Check Ollama (Optional)
     ollama_url = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
     try:
         async with httpx.AsyncClient(timeout=5.0) as client:
@@ -48,12 +48,10 @@ async def health_check(response: Response, db: Session = Depends(get_db)):
                 health_status["services"]["ollama"]["status"] = "connected"
             else:
                 health_status["services"]["ollama"]["status"] = f"error: {ollama_res.status_code}"
-                is_healthy = False
     except Exception as e:
         logger.error(f"Health check failed for Ollama: {str(e)}")
-        health_status["services"]["ollama"]["status"] = "error"
-        health_status["services"]["ollama"]["message"] = str(e)
-        is_healthy = False
+        health_status["services"]["ollama"]["status"] = "offline (optional)"
+        health_status["services"]["ollama"]["message"] = "Ollama is not running. AI features will be disabled."
 
     if not is_healthy:
         health_status["status"] = "unhealthy"
