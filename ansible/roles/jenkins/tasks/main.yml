@@ -74,6 +74,18 @@
   when: jenkins_started is changed or jenkins_restarted is changed
   failed_when: false
 
+# ---------- Install CLI Tools inside Jenkins ----------
+
+- name: "Install Docker and Kubectl inside Jenkins container"
+  ansible.builtin.shell: |
+    docker exec -u root {{ jenkins_container_name }} apt-get update
+    docker exec -u root {{ jenkins_container_name }} apt-get install -y docker.io curl
+    docker exec -u root {{ jenkins_container_name }} curl -LO "https://dl.k8s.io/release/v1.28.3/bin/linux/amd64/kubectl"
+    docker exec -u root {{ jenkins_container_name }} install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+  register: jenkins_tools_install
+  changed_when: jenkins_tools_install.rc == 0
+  when: jenkins_started is changed
+
 # ---------- Retrieve Initial Admin Password ----------
 
 - name: "Get Jenkins initial admin password"
