@@ -10,7 +10,7 @@ import ExecutionPanel from './components/ExecutionPanel';
 import PublicAgent from './pages/PublicAgent';
 import Toast from './components/Toast';
 
-const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:8000';
+const API_BASE = import.meta.env.VITE_API_BASE || '/api';
 
 function App() {
   const [marketplaceAgents, setMarketplaceAgents] = useState([]);

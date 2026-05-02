@@ -23,7 +23,7 @@ async def health_check(response: Response, db: Session = Depends(get_db)):
             "ollama": {"status": "unknown"}
         },
         "cache": {
-            "size": len(BaseAgent._cache)
+            "size": 0
         }
     }
     
