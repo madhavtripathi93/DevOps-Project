@@ -45,6 +45,7 @@
     -p 50000:50000
     -v {{ jenkins_home }}:/var/jenkins_home
     -v /var/run/docker.sock:/var/run/docker.sock
+    -v /home/ubuntu/.minikube:/home/ubuntu/.minikube
     jenkins/jenkins:lts
   when: jenkins_container_status.stdout == ""
   register: jenkins_started
