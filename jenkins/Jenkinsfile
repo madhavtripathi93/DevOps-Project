@@ -101,7 +101,7 @@ pipeline {
                 echo "Deploying to Kubernetes namespace: ${K8S_NAMESPACE}"
 
                 // Ensure Jenkins is on the minikube network so it can reach the API
-                sh "docker network connect devops-cluster jenkins-devops || true"
+                sh "docker network connect minikube jenkins-devops || true"
 
                 // Ensure namespace exists
                 sh "kubectl apply -f kubernetes/namespace.yaml"
